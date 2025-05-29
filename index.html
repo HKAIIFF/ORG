@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hong Kong AI International Film Festival</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #e94560;
+            --secondary: #0f3460;
+            --dark: #111827;
+            --light: #f3f4f6;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--dark);
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff5678 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), #ff5678);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .hero-image {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 3px;
+            margin-top: 15px;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(90deg, var(--primary), #ff5678);
+        }
+        
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .animated-bg span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 50%;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 20%;
+            }
+        }
+        
+        .eco-pillar {
+            position: relative;
+        }
+        
+        .eco-pillar::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(180deg, var(--primary), transparent);
+            bottom: -60px;
+            left: 50%;
+            margin-left: -1px;
+        }
+        
+        .language-switcher {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1f2937;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            min-width: 120px;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .language-option:hover {
+            background: rgba(233, 69, 96, 0.2);
+        }
+        
+        .timeline-container {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), #16213e);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, #ff5678 100%);
+            top: 15px;
+            left: 50%;
+            margin-left: -10px;
+            z-index: 10;
+        }
+        
+        .timeline-content {
+            padding: 25px;
+            background: rgba(22, 33, 62, 0.8);
+            border-radius: 15px;
+            position: relative;
+            width: 45%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-left {
+            left: 0;
+        }
+        
+        .timeline-right {
+            left: 55%;
+        }
+        
+        .stats-card {
+            background: rgba(31, 41, 55, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #ff5678);
+        }
+        
+        .platform-card {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.3);
+            border-color: rgba(233, 69, 96, 0.5);
+        }
+        
+        .platform-header {
+            background: rgba(15, 52, 96, 0.5);
+            padding: 20px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .feature-item {
+            background: rgba(31, 41, 55, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(233, 69, 96, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff5678 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(233, 69, 96, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .participant-card {
+            background: rgba(31, 41, 55, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .participant-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+        
+        .participant-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .advantage-card {
+            background: rgba(31, 41, 55, 0.7);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+        }
+        
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #ff5678);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .advantage-card:hover::before {
+            opacity: 1;
+        }
+        
+        .vision-card {
+            background: rgba(31, 41, 55, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .vision-card::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(233, 69, 96, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+        
+        .footer-link {
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline-container::before {
+                left: 20px;
+            }
+            
+            .timeline-content {
+                width: calc(100% - 60px);
+                left: 60px;
+            }
+            
+            .timeline-dot {
+                left: 20px;
+            }
+            
+            .timeline-left, .timeline-right {
+                left: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-90 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center">
+                    <a href="#" class="text-white font-bold text-2xl flex items-center">
+                        <span class="text-pink-500">HK</span>AIIFF
+                    </a>
+                </div>
+                
+                <nav class="hidden lg:flex space-x-6">
+                    <a href="#home" class="nav-link text-white hover:text-pink-500 transition duration-300">Home</a>
+                    <a href="#exhibition" class="nav-link text-white hover:text-pink-500 transition duration-300">Exhibition</a>
+                    <a href="#market" class="nav-link text-white hover:text-pink-500 transition duration-300">Market</a>
+                    <a href="#academy" class="nav-link text-white hover:text-pink-500 transition duration-300">Academy</a>
+                    <a href="#submission" class="nav-link text-white hover:text-pink-500 transition duration-300">Submission</a>
+                    <a href="#exchange" class="nav-link text-white hover:text-pink-500 transition duration-300">Exchange</a>
+                    <a href="#platform" class="nav-link text-white hover:text-pink-500 transition duration-300">404world</a>
+                    <a href="#saft" class="nav-link text-white hover:text-pink-500 transition duration-300">Saft</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <div class="language-switcher relative">
+                        <div class="flex items-center text-white">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span>EN</span>
+                            <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                        </div>
+                        <div class="language-dropdown">
+                            <div class="language-option">
+                                <span class="mr-2">🇺🇸</span>
+                                <span>English</span>
+                            </div>
+                            <div class="language-option">
+                                <span class="mr-2">🇨🇳</span>
+                                <span>简体中文</span>
+                            </div>
+                            <div class="language-option">
+                                <span class="mr-2">🇹🇼</span>
+                                <span>繁體中文</span>
+                            </div>
+                            <div class="language-option">
+                                <span class="mr-2">🇯🇵</span>
+                                <span>日本語</span>
+                            </div>
+                            <div class="language-option">
+                                <span class="mr-2">🇰🇷</span>
+                                <span>한국어</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:hidden">
+                        <button id="mobile-menu-button" class="text-white">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <div class="py-4 flex flex-col space-y-3">
+                    <a href="#home" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Home</a>
+                    <a href="#exhibition" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Exhibition</a>
+                    <a href="#market" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Market</a>
+                    <a href="#academy" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Academy</a>
+                    <a href="#submission" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Submission</a>
+                    <a href="#exchange" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Exchange</a>
+                    <a href="#platform" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">404world</a>
+                    <a href="#saft" class="py-2 text-white hover:text-pink-500 px-4 rounded-lg hover:bg-gray-800">Saft</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-40 pb-32 gradient-bg overflow-hidden">
+        <div class="animated-bg">
+            <span style="--i:11;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:24;"></span>
+            <span style="--i:10;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:20;"></span>
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="w-full lg:w-1/2 mb-16 lg:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                        Hong Kong AI International Film Festival
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-gray-300">
+                        World's First AI-Native Film and Media Ecosystem
+                    </p>
+                    <p class="text-gray-400 mb-8 max-w-lg">
+                        Revolutionizing the global creative landscape through an innovative ecosystem model that transforms creation, financing, distribution, and audience experience.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#ecosystem" class="py-3 px-8 btn-gradient rounded-full font-semibold text-white shadow-lg">
+                            Explore Ecosystem
+                        </a>
+                        <a href="#participate" class="py-3 px-8 btn-outline rounded-full font-semibold text-white">
+                            Join the Revolution
+                        </a>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="relative">
+                        <div class="hero-image">
+                            <div class="bg-gray-800 border-2 border-dashed rounded-xl w-full h-96 lg:h-[500px] flex items-center justify-center text-gray-500">
+                                <i class="fas fa-film text-6xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-5 -right-5 bg-blue-900 bg-opacity-80 rounded-lg p-4 shadow-xl">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-3 h-3 rounded-full bg-pink-500 animate-pulse"></div>
+                                <p class="text-sm font-medium">Launching 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#111827" fill-opacity="1" d="M0,64L48,80C96,96,192,128,288,154.7C384,181,480,203,576,197.3C672,192,768,160,864,165.3C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="stats-card p-6">
+                    <div class="text-pink-500 text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Market Growth</h3>
+                    <div class="text-sm text-gray-400">
+                        <p class="mb-2">2023: $30 Billion</p>
+                        <p class="mb-2">2025: $75 Billion</p>
+                        <p>2030: $200+ Billion</p>
+                    </div>
+                    <div class="mt-4 h-1 w-full bg-gray-700 rounded-full">
+                        <div class="h-1 rounded-full accent-gradient" style="width: 83%"></div>
+                    </div>
+                    <p class="mt-2 text-xs text-gray-500">83% Annual Growth Rate</p>
+                </div>
+                
+                <div class="stats-card p-6">
+                    <div class="text-pink-500 text-4xl mb-4">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Asia-Pacific Leadership</h3>
+                    <p class="text-sm text-gray-400 mb-4">Asia-Pacific region to reach $26 billion by 2025, representing 35% of the global market.</p>
+                    <div class="flex items-center justify-center">
+                        <div class="relative h-24 w-24">
+                            <svg viewBox="0 0 36 36" class="h-24 w-24">
+                                <path d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    fill="none" stroke="#444" stroke-width="1" stroke-dasharray="100, 100" />
+                                <path d="M18 2.0845
+                                    a 15.9155 15.9155 0 0 1 0 31.831
+                                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                                    fill="none" stroke="#e94560" stroke-width="1" stroke-dasharray="35, 100" />
+                                <text x="18" y="20.5" font-size="8" text-anchor="middle" fill="white">35%</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stats-card p-6">
+                    <div class="text-pink-500 text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Talent Gap</h3>
+                    <p class="text-sm text-gray-400 mb-2">Global talent shortage in AI-native film and media:</p>
+                    <div class="text-center text-3xl font-bold mb-2">180,000+</div>
+                    <p class="text-sm text-gray-400">Expected to grow to 500,000 in the next 5 years.</p>
+                    <p class="text-xs text-gray-500 mt-4">Asia-Pacific accounts for nearly 50% of the gap</p>
+                </div>
+                
+                <div class="stats-card p-6">
+                    <div class="text-pink-500 text-4xl mb-4">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Hong Kong Advantage</h3>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i>East-West cultural bridge</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i>International financial center</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i>Gateway to mainland market</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i>Technology innovation hub</li>
+                        <li><i class="fas fa-check text-pink-500 mr-2"></i>Supportive policies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ecosystem Section -->
+    <section id="ecosystem" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    The AI Film Ecosystem
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    The world's first complete AI-native film and media ecosystem, creating a seamless and integrated value chain
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                <div class="eco-pillar bg-gray-900 rounded-xl p-8 text-center card">
+                    <div class="w-20 h-20 flex items-center justify-center rounded-full bg-blue-900 mb-6 mx-auto">
+                        <i class="fas fa-film text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Exhibition & Competition</h3>
+                    <p class="text-sm text-gray-400 mb-4">International platform for discovering and rewarding outstanding AI-native film works</p>
+                    <a href="#exhibition" class="text-pink-500 text-sm inline-flex items-center justify-center">
+                        Learn more <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="eco-pillar bg-gray-900 rounded-xl p-8 text-center card">
+                    <div class="w-20 h-20 flex items-center justify-center rounded-full bg-blue-900 mb-6 mx-auto">
+                        <i class="fas fa-chart-line text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Film Market</h3>
+                    <p class="text-sm text-gray-400 mb-4">Film project financing and trading platform integrating Web3 and AI technologies</p>
+                    <a href="#market" class="text-pink-500 text-sm inline-flex items-center justify-center">
+                        Learn more <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="eco-pillar bg-gray-900 rounded-xl p-8 text-center card">
+                    <div class="w-20 h-20 flex items-center justify-center rounded-full bg-blue-900 mb-6 mx-auto">
+                        <i class="fas fa-graduation-cap text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Film Academy</h3>
+                    <p class="text-sm text-gray-400 mb-4">Professional educational institution for training AI + film composite talents</p>
+                    <a href="#academy" class="text-pink-500 text-sm inline-flex items-center justify-center">
+                        Learn more <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+                
+                <div class="eco-pillar bg-gray-900 rounded-xl p-8 text-center card">
+                    <div class="w-20 h-20 flex items-center justify-center rounded-full bg-blue-900 mb-6 mx-auto">
+                        <i class="fas fa-globe text-3xl text-pink-500"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Submission Center</h3>
+                    <p class="text-sm text-gray-400 mb-4">International hub providing full-chain services for AI-native film content</p>
+                    <a href="#submission" class="text-pink-500 text-sm inline-flex items-center justify-center">
+                        Learn more <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Expansion Platforms</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="platform-card">
+                            <div class="platform-header">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-xl font-bold">404.world</h3>
+                                    <div class="flex items-center px-3 py-1 rounded-full accent-gradient text-xs">
+                                        <span>Interactive Streaming</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mt-2 text-sm">The world's first interactive streaming platform focused on AI-native film and media content</p>
+                            </div>
+                            <div class="p-6">
+                                <a href="#platform" class="text-pink-500 text-sm inline-flex items-center">
+                                    Explore Platform <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="platform-card">
+                            <div class="platform-header">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-xl font-bold">AIF Exchange</h3>
+                                    <div class="flex items-center px-3 py-1 rounded-full accent-gradient text-xs">
+                                        <span>Digital Asset Trading</span>
+                                    </div>
+                                </div>
+                                <p class="text-gray-300 mt-2 text-sm">The financial infrastructure of the Hong Kong AI International Film Festival ecosystem</p>
+                            </div>
+                            <div class="p-6">
+                                <a href="#exchange" class="text-pink-500 text-sm inline-flex items-center">
+                                    Explore Exchange <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-900 rounded-xl p-8 shadow-xl border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-6">Ecosystem Value Flow</h3>
+                        <p class="text-gray-400 mb-6">
+                            Our integrated ecosystem creates a self-sustaining cycle of value creation and distribution, connecting creators, investors, and audiences through cutting-edge technology.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-sync-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Unified Value Circulation</h4>
+                                    <p class="text-sm text-gray-400">Seamless value transfer across all ecosystem components</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-search-dollar text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Value Discovery</h4>
+                                    <p class="text-sm text-gray-400">Transparent mechanisms for discovering the value of AI-native film projects</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-gift text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold mb-1">Incentive Ecosystem</h4>
+                                    <p class="text-sm text-gray-400">Robust mechanisms to boost participation and activity</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exhibition Section -->
+    <section id="exhibition" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    Exhibition & Competition
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    The premier international showcase for AI-native film and media content
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <div class="bg-gray-800 border-2 border-dashed rounded-xl w-full h-96 flex items-center justify-center text-gray-500">
+                        <i class="fas fa-video text-6xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Celebrating AI Innovation in Film</h3>
+                    <p class="text-gray-400 mb-6">
+                        Our annual festival brings together the most innovative AI-generated films from around the world, providing a platform for creators to showcase their work and compete for prestigious awards.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="feature-item">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-trophy text-white text-sm"></i>
+                                </div>
+                                <h4 class="font-bold">Award Categories</h4>
+                            </div>
+                            <p class="text-sm text-gray-400">10+ categories recognizing excellence in AI filmmaking</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-globe text-white text-sm"></i>
+                                </div>
+                                <h4 class="font-bold">Global Reach</h4>
+                            </div>
+                            <p class="text-sm text-gray-400">Films from 50+ countries showcased annually</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-users text-white text-sm"></i>
+                                </div>
+                                <h4 class="font-bold">Industry Networking</h4>
+                            </div>
+                            <p class="text-sm text-gray-400">Connect with creators, studios, and investors</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-3">
+                                    <i class="fas fa-lightbulb text-white text-sm"></i>
+                                </div>
+                                <h4 class="font-bold">Innovation Showcase</h4>
+                            </div>
+                            <p class="text-sm text-gray-400">Cutting-edge AI film technologies on display</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="#" class="py-3 px-8 btn-gradient rounded-full font-semibold text-white shadow-lg inline-block">
+                    Submit Your Film
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Section -->
+    <section id="market" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    AI Film Market
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Transforming film financing through blockchain and AI technologies
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Decentralized Film Financing</h3>
+                    <p class="text-gray-400 mb-6">
+                        Our innovative marketplace connects filmmakers with global investors, leveraging blockchain technology to create transparent, efficient, and accessible financing solutions for AI-generated content.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span class="text-gray-300">Token-based investment in film projects</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span class="text-gray-300">Smart contract-enabled revenue sharing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span class="text-gray-300">Global marketplace for film rights trading</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 rounded-full bg-pink-500 flex items-center justify-center mr-3 mt-1 flex-shrink-0">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span class="text-gray-300">AI-powered project valuation and risk assessment</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="bg-gray-900 rounded-xl p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <div class="text-pink-500 text-3xl mb-4">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <h4 class="font-bold mb-3 text-lg">For Creators</h4>
+                                <p class="text-sm text-gray-400 mb-4">Secure funding for your AI film projects from global investors</p>
+                                <a href="#" class="text-pink-500 text-sm inline-flex items-center">
+                                    Get Started <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                </a>
+                            </div>
+                            
+                            <div class="bg-gray-800 p-6 rounded-lg">
+                                <div class="text-pink-500 text-3xl mb-4">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <h4 class="font-bold mb-3 text-lg">For Investors</h4>
+                                <p class="text-sm text-gray-400 mb-4">Diversify your portfolio with innovative AI film projects</p>
+                                <a href="#" class="text-pink-500 text-sm inline-flex items-center">
+                                    Explore Opportunities <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academy Section -->
+    <section id="academy" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    AI Film Academy
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Training the next generation of AI-native filmmakers
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <div class="bg-gray-800 border-2 border-dashed rounded-xl w-full h-96 flex items-center justify-center text-gray-500">
+                        <i class="fas fa-graduation-cap text-6xl"></i>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Bridging AI and Creative Arts</h3>
+                    <p class="text-gray-400 mb-6">
+                        Our comprehensive curriculum combines technical AI training with creative filmmaking skills, preparing students for careers at the intersection of technology and storytelling.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-800 p-5 rounded-lg">
+                            <h4 class="font-bold mb-3 flex items-center">
+                                <i class="fas fa-certificate text-pink-500 mr-2"></i>
+                                Certification Programs
+                            </h4>
+                            <p class="text-sm text-gray-400">6-12 month intensive programs in AI filmmaking</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-5 rounded-lg">
+                            <h4 class="font-bold mb-3 flex items-center">
+                                <i class="fas fa-laptop-code text-pink-500 mr-2"></i>
+                                Masterclasses
+                            </h4>
+                            <p class="text-sm text-gray-400">Industry-led workshops with AI film pioneers</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-5 rounded-lg">
+                            <h4 class="font-bold mb-3 flex items-center">
+                                <i class="fas fa-briefcase text-pink-500 mr-2"></i>
+                                Career Placement
+                            </h4>
+                            <p class="text-sm text-gray-400">Connections to studios and production companies</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 p-5 rounded-lg">
+                            <h4 class="font-bold mb-3 flex items-center">
+                                <i class="fas fa-flask text-pink-500 mr-2"></i>
+                                Research Initiatives
+                            </h4>
+                            <p class="text-sm text-gray-400">Cutting-edge research in AI film technologies</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 404.world Section -->
+    <section id="platform" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    404.world Interactive Platform
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    The world's first interactive streaming platform for AI-native content
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Personalized Parallel Worlds</h3>
+                    <p class="text-gray-400 mb-6">
+                        404.world transforms each film into a personalized parallel world, generating customized plots and interactive experiences in real-time based on user-authorized personal data.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-user-astronaut text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Personal Interactive Worlds</h4>
+                                <p class="text-sm text-gray-400">Unique experiences tailored to each viewer</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-project-diagram text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">Infinite Narrative Possibilities</h4>
+                                <p class="text-sm text-gray-400">Stories that evolve with each viewing</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-pink-500 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-users-cog text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold mb-1">AIUGC Ecosystem</h4>
+                                <p class="text-sm text-gray-400">AI-assisted user-generated content creation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-gray-900 rounded-xl p-1 bg-gradient-to-br from-pink-500 to-purple-600">
+                        <div class="bg-gray-900 p-8 rounded-xl">
+                            <div class="bg-gray-800 border-2 border-dashed rounded-xl w-full h-80 flex items-center justify-center text-gray-500">
+                                <i class="fas fa-play-circle text-6xl"></i>
+                            </div>
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="bg-gray-800 p-4 rounded-lg">
+                                    <h4 class="font-semibold mb-2">Basic Member</h4>
+                                    <p class="text-xs text-gray-400">Standard viewing & basic interaction</p>
+                                </div>
+                                <div class="bg-gray-800 p-4 rounded-lg accent-gradient">
+                                    <h4 class="font-semibold mb-2">404.world+</h4>
+                                    <p class="text-xs text-white">All features & unlimited creation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="py-20 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    Development Roadmap
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Our strategic growth plan for building the global AI film ecosystem
+                </p>
+            </div>
+            
+            <div class="timeline-container">
+                <!-- 2025-2026 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-left">
+                        <h3 class="text-xl font-bold mb-2">Phase One (2025-2026): Foundation Period</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-400">
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>First Hong Kong AI International Film Festival</li>
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>Core curriculum system building</li>
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>Basic AI Film Market modules</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>Initial global submission network</li>
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>404.world basic version release</li>
+                                    <li><i class="fas fa-check-circle text-pink-500 mr-2"></i>AIF Exchange compliance & launch</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2027-2028 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-right">
+                        <h3 class="text-xl font-bold mb-2">Phase Two (2027-2028): Growth Period</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-400">
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>Global festival influence expansion</li>
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>20+ global academy centers</li>
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>$1M daily market trading volume</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>50+ global submission nodes</li>
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>10 million 404.world users</li>
+                                    <li><i class="fas fa-chart-line text-pink-500 mr-2"></i>$5B ecosystem token market value</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 2029-2030 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content timeline-left">
+                        <h3 class="text-xl font-bold mb-2">Phase Three (2029-2030): Maturity Period</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-400">
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>Global AI-native film industry benchmark</li>
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>100,000+ AI film professionals trained</li>
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>$10B content trading market scale</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="space-y-2">
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>Global content distribution network</li>
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>50 million monthly active users</li>
+                                    <li><i class="fas fa-flag text-pink-500 mr-2"></i>Complete self-reinforcing cycle</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Participation Section -->
+    <section id="participate" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-heading inline-block mx-auto">
+                    Participation Opportunities
+                </h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Join us in shaping the future of the AI film and media industry
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="participant-card">
+                    <div class="p-6">
+                        <div class="participant-icon accent-gradient">
+                            <i class="fas fa-paint-brush text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-center">For Creators</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Submit your AI-native works to the Exhibition & Competition</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Learn cutting-edge AI creation skills at the AI Film Academy</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Secure financing through the AI Film Market platform</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <a href="#" class="py-2 px-6 btn-gradient rounded-full text-white font-semibold inline-block">
+                                Creator Application
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="participant-card">
+                    <div class="p-6">
+                        <div class="participant-icon accent-gradient">
+                            <i class="fas fa-chart-pie text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-center">For Investors</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Invest in AI film projects through the AI Film Market</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Participate in AIF platform and film-specific token investment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Support regional AI Film Academy cooperation centers</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <a href="#" class="py-2 px-6 btn-gradient rounded-full text-white font-semibold inline-block">
+                                Investor Information
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="participant-card">
+                    <div class="p-6">
+                        <div class="participant-icon accent-gradient">
+                            <i class="fas fa-building text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-center">For Institutions</h3>
+                        <ul class="space-y-3 text-gray-400">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Technology partners providing AI and blockchain support</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Film festival partners collaborating with our competition</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                <span>Educational institutions co-building academy centers</span>
+                            </li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <a href="#" class="py-2 px-6 btn-gradient rounded-full text-white font-semibold inline-block">
+                                Partnership Inquiry
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 pt-16 pb-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <span class="text-pink-500">HK</span>AIIFF
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        World's First AI-Native Film and Media Ecosystem
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="footer-link text-gray-400">Home</a></li>
+                        <li><a href="#exhibition" class="footer-link text-gray-400">Exhibition</a></li>
+                        <li><a href="#market" class="footer-link text-gray-400">Market</a></li>
+                        <li><a href="#academy" class="footer-link text-gray-400">Academy</a></li>
+                        <li><a href="#platform" class="footer-link text-gray-400">404.world</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="footer-link text-gray-400">Documentation</a></li>
+                        <li><a href="#" class="footer-link text-gray-400">Whitepaper</a></li>
+                        <li><a href="#" class="footer-link text-gray-400">Blog</a></li>
+                        <li><a href="#" class="footer-link text-gray-400">FAQ</a></li>
+                        <li><a href="#saft" class="footer-link text-gray-400">SAFT</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-2 text-pink-500"></i>
+                            <a href="mailto:info@hkaiiff.org" class="footer-link text-gray-400">info@hkaiiff.org</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe mt-1 mr-2 text-pink-500"></i>
+                            <a href="https://www.hkaiiff.org" target="_blank" class="footer-link text-gray-400">www.hkaiiff.org</a>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-2 text-pink-500"></i>
+                            <span class="text-gray-400">Hong Kong SAR, China</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm">© 2025 Hong Kong AI International Film Festival. All rights reserved.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="footer-link text-gray-500 text-sm">Privacy Policy</a>
+                        <a href="#" class="footer-link text-gray-500 text-sm">Terms of Service</a>
+                        <a href="#" class="footer-link text-gray-500 text-sm">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('active');
+        });
+        
+        // Language switcher
+        const languageSwitcher = document.querySelector('.language-switcher');
+        const languageDropdown = document.querySelector('.language-dropdown');
+        
+        languageSwitcher.addEventListener('click', function() {
+            languageDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!languageSwitcher.contains(event.target)) {
+                languageDropdown.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.remove('active');
+                
+                // Close language dropdown
+                languageDropdown.classList.remove('active');
+                
+                // Scroll to section
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
