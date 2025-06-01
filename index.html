@@ -3,439 +3,1183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>香港AI國際電影節</title>
+    <title>香港AI國際電影節 | 全球首個AI原生電影與媒體生態系統</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        :root {
+            --primary: #3498db;
+            --secondary: #8e44ad;
+            --accent: #00ff9d;
+        }
         
         body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #0f172a;
-            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 20%);
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
+            100% { text-shadow: 0 0 25px rgba(0, 255, 157, 0.6), 0 0 35px rgba(52, 152, 219, 0.4); }
+        }
+        
+        .logo-sub {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-top: -10px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .gradient-bg {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
         
-        .accent-gradient {
-            background: linear-gradient(135deg, #e94560 0%, #ff5678 100%);
+        .accent-bg {
+            background: rgba(0, 255, 157, 0.1);
+            border: 1px solid rgba(0, 255, 157, 0.2);
         }
         
-        .nav-link {
+        .card {
+            background-color: rgba(26, 32, 44, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 255, 157, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .hero {
             position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
         }
         
-        .nav-link::after {
-            content: '';
+        .hero:before {
+            content: "";
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
+            top: 0;
             left: 0;
-            background: linear-gradient(90deg, #e94560, #ff5678);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after {
             width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
         }
         
-        .hero-animation {
-            animation: float 6s ease-in-out infinite;
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         
-        @keyframes float {
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            animation: bgPan 30s infinite linear;
+        }
+        
+        @keyframes bgPan {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
+            50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
         
-        .ecosystem-card {
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+            opacity: 0;
         }
         
-        .ecosystem-card:hover {
-            transform: translateY(-5px);
-            border-color: #e94560;
-            box-shadow: 0 10px 25px -5px rgba(233, 69, 96, 0.25);
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-in-out forwards;
+            opacity: 0;
         }
         
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            margin: 12px auto 0;
-            background: linear-gradient(90deg, #e94560, #ff5678);
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-in-out forwards;
+            opacity: 0;
         }
         
-        .timeline-container {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(to right, var(--primary), var(--accent), var(--secondary));
+            border-radius: 9999px;
+            height: 8px;
+        }
+        
+        .cyber-border {
             position: relative;
         }
         
-        .timeline-container::before {
+        .cyber-border:after {
             content: '';
             position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, transparent 30%, var(--accent) 45%, var(--secondary) 55%, transparent 70%);
+            background-size: 200% 200%;
+            animation: borderGlow 5s linear infinite;
+            z-index: -1;
+            border-radius: 20px;
+        }
+        
+        @keyframes borderGlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .ai-element {
+            position: absolute;
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--accent);
+            z-index: 3;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+        
+        .data-stream {
+            position: absolute;
+            height: 100px;
             width: 2px;
-            height: 100%;
-            background: linear-gradient(to bottom, #e94560, #16213e);
+            background: linear-gradient(to bottom, transparent, var(--accent), var(--secondary), transparent);
+            z-index: 0;
+            animation: dataStream 2s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes dataStream {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .language-selector {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: rgba(26, 32, 44, 0.95);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            top: 40px;
+            right: 0;
+        }
+        
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+        
+        .language-dropdown a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .language-dropdown a:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-dropdown img {
+            width: 24px;
+            margin-right: 10px;
+        }
+        
+        .login-dropdown {
+            display: none;
+            position: absolute;
+            background-color: rgba(26, 32, 44, 0.95);
+            min-width: 280px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            top: 50px;
+            right: 0;
+            padding: 15px;
+        }
+        
+        .login-container:hover .login-dropdown {
+            display: block;
+        }
+        
+        .login-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .login-option:hover {
+            background: rgba(52, 152, 219, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .login-option i {
+            font-size: 20px;
+            margin-right: 12px;
+            width: 30px;
+            text-align: center;
+        }
+        
+        .login-option span {
+            font-weight: 500;
+        }
+        
+        .login-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 15px 0;
+        }
+        
+        .ai-translate-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255,255,255,0.05);
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .ai-translate-toggle:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-left: 10px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .language-indicator {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .language-indicator:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-indicator img {
+            width: 24px;
+            margin-right: 8px;
+        }
+        
+        .wallet-option {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.3), rgba(142, 68, 173, 0.3));
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .ai-tech-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .copyright-card-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .testimonial-img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+        }
+        
+        .token-card {
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .token-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.25);
+        }
+        
+        .hkaifm-logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .section-title.center:after {
             left: 50%;
             transform: translateX(-50%);
         }
         
-        .timeline-item {
+        .ai-chip {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin: 0 5px 5px 0;
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(26, 32, 44, 0.5);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(26, 32, 44, 0.7);
+        }
+        
+        .stats-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .stats-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .ai-tool-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.15);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .creation-step {
             position: relative;
-            padding: 0 30px;
-            margin-bottom: 50px;
+            padding-left: 60px;
+            margin-bottom: 40px;
         }
         
-        .timeline-item:nth-child(odd) {
-            margin-left: auto;
-            margin-right: 50%;
+        .creation-step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
         
-        .timeline-item:nth-child(even) {
-            margin-right: auto;
-            margin-left: 50%;
+        .creation-timeline {
+            position: relative;
+            padding-left: 20px;
         }
         
-        .timeline-item::before {
+        .creation-timeline:before {
             content: '';
             position: absolute;
-            height: 16px;
-            width: 16px;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .creation-timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .creation-timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            background: #e94560;
-            top: 15px;
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(0, 255, 157, 0.2);
         }
         
-        .timeline-item:nth-child(odd)::before {
-            right: -8px;
+        .creation-timeline-item:last-child {
+            padding-bottom: 0;
         }
         
-        .timeline-item:nth-child(even)::before {
-            left: -8px;
+        .model-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
         }
         
-        .pillar-card {
-            border-top: 3px solid #e94560;
+        .model-badge i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
         
-        .pillar-card:hover {
+        .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 255, 157, 0.15);
         }
         
-        .pillar-card::before {
-            content: '';
-            position: absolute;
-            top: -60px;
-            right: -60px;
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            background: rgba(233, 69, 96, 0.1);
-            z-index: 0;
-        }
-        
-        .stat-card {
-            transition: all 0.3s ease;
-        }
-        
-        .stat-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .platform-icon {
+        .feature-card-icon {
             width: 60px;
             height: 60px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
-            background: #1f2937;
-            margin: 0 auto 1rem;
-            color: #e94560;
-            font-size: 24px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.2), rgba(142, 68, 173, 0.2));
         }
         
-        .animated-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
+        .feature-card-icon i {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
-        .animated-bg span {
-            position: absolute;
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            animation: animate 25s linear infinite;
-            bottom: -150px;
-            border-radius: 50%;
-        }
-        
-        @keyframes animate {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        .nav-btn {
+        .pricing-card {
             transition: all 0.3s ease;
-        }
-        
-        .nav-btn:hover {
-            background: #e94560;
-            color: white;
-        }
-        
-        /* Image placeholder styles */
-        .image-placeholder {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             position: relative;
             overflow: hidden;
         }
         
-        .image-placeholder::before {
-            content: '';
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+        }
+        
+        .pricing-card.popular:before {
+            content: '熱門';
             position: absolute;
-            top: 0;
+            top: 15px;
+            right: -30px;
+            background: var(--accent);
+            color: #000;
+            font-weight: bold;
+            padding: 3px 30px;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+        }
+        
+        /* 修正路线图样式 */
+        .roadmap-container {
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .roadmap-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .roadmap-item {
+            position: relative;
+            width: calc(50% - 40px);
+            margin-bottom: 60px;
+        }
+        
+        .roadmap-item.left {
+            margin-right: auto;
+            text-align: right;
+            padding-right: 60px;
+        }
+        
+        .roadmap-item.right {
+            margin-left: auto;
+            padding-left: 60px;
+        }
+        
+        .roadmap-dot {
+            position: absolute;
+            top: 30px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 4px solid #0a0a0a;
+        }
+        
+        .roadmap-item.left .roadmap-dot {
+            right: -12px;
+        }
+        
+        .roadmap-item.right .roadmap-dot {
+            left: -12px;
+        }
+        
+        .roadmap-content {
+            background: rgba(26, 32, 44, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .roadmap-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .roadmap-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        .roadmap-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .roadmap-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .roadmap-list li:before {
+            content: '✓';
+            position: absolute;
             left: 0;
+            color: var(--accent);
+        }
+        
+        /* 调整移动端路线图样式 */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .language-selector {
+                margin-right: 10px;
+            }
+            
+            .ai-tech-img {
+                height: 300px;
+            }
+            
+            .logo-font {
+                font-size: 1.8rem;
+            }
+            
+            .hero-bg {
+                animation: none;
+            }
+            
+            /* 移动端路线图样式 */
+            .roadmap-line {
+                left: 20px;
+            }
+            
+            .roadmap-item {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+                text-align: left;
+                padding-left: 60px;
+            }
+            
+            .roadmap-item.left, 
+            .roadmap-item.right {
+                margin-right: 0;
+                margin-left: 40px;
+                text-align: left;
+                padding-right: 0;
+                padding-left: 60px;
+            }
+            
+            .roadmap-item.left .roadmap-dot, 
+            .roadmap-item.right .roadmap-dot {
+                left: -12px;
+                right: auto;
+            }
+        }
+        
+        /* 新的联系我们样式 */
+        .contact-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .contact-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-form-row {
+            margin-bottom: 20px;
+        }
+        
+        .contact-form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .contact-form-input {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, 
-                rgba(233, 69, 96, 0.1) 0%, 
-                rgba(233, 69, 96, 0.05) 20%, 
-                rgba(15, 23, 42, 0.2) 40%, 
-                rgba(15, 23, 42, 0.4) 60%, 
-                rgba(233, 69, 96, 0.05) 80%, 
-                rgba(233, 69, 96, 0.1) 100%);
-            background-size: 400% 400%;
-            animation: shimmer 3s ease infinite;
+            padding: 12px 15px;
+            background: rgba(26, 32, 44, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s;
         }
         
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .contact-form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0, 255, 157, 0.2);
         }
         
-        .image-placeholder-text {
-            position: relative;
-            z-index: 1;
-            color: #94a3b8;
-            text-align: center;
-            padding: 1rem;
-            font-size: 0.875rem;
+        .contact-form-textarea {
+            min-height: 150px;
+            resize: vertical;
         }
         
-        .ai-film-img {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 0.75rem;
-            position: relative;
-            overflow: hidden;
+        .contact-form-submit {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .contact-form-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .contact-info-section {
+            margin-top: 50px;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            font-size: 20px;
+            transition: all 0.3s;
         }
         
-        .ai-film-img::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(233, 69, 96, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.1) 0%, transparent 40%),
-                linear-gradient(135deg, #1e293b, #0f172a);
-        }
-        
-        .ai-film-img-content {
-            position: relative;
-            z-index: 2;
-            color: #e2e8f0;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .ai-film-img-content i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #e94560;
-        }
-        
-        .ai-film-img-content h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .ai-film-img-content p {
-            font-size: 0.875rem;
-            color: #94a3b8;
+        .social-icon:hover {
+            background: var(--accent);
+            color: #0a0a0a;
+            transform: translateY(-5px);
         }
     </style>
 </head>
 <body>
+    <!-- AI Elements -->
+    <div class="ai-element" style="top: 120px; left: 10%;">
+        MODEL_ID: GEN-7840 <br>
+        STATUS: RENDERING <br>
+        // AI 電影生成激活
+    </div>
+    
+    <div class="ai-element" style="bottom: 150px; right: 15%;">
+        TOKEN_DIST: OPTIMAL <br>
+        HASH: 0x71A9B3...F7E <br>
+        // 區塊鏈驗證
+    </div>
+    
+    <!-- Data streams -->
+    <div class="data-stream" style="left: 20%; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 40%; animation-delay: 0.5s;"></div>
+    <div class="data-stream" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
+
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-lg shadow-lg">
-        <div class="container mx-auto px-6 py-3">
-            <div class="flex justify-between items-center">
-                <a href="#" class="flex items-center">
-                    <span class="text-2xl font-bold"><span class="text-pink-500">HK</span>AIIFF</span>
-                </a>
-                
-                <div class="hidden md:flex space-x-6">
-                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition">關於</a>
-                    <a href="#ecosystem" class="nav-link text-gray-300 hover:text-white transition">生態系統</a>
-                    <a href="#pillars" class="nav-link text-gray-300 hover:text-white transition">核心支柱</a>
-                    <a href="#platforms" class="nav-link text-gray-300 hover:text-white transition">平台</a>
-                    <a href="#roadmap" class="nav-link text-gray-300 hover:text-white transition">路線圖</a>
-                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition">聯繫</a>
-                </div>
-                
-                <a href="#participate" class="hidden md:block py-2 px-4 rounded-full text-sm font-medium border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition nav-btn">
-                    立即加入
-                </a>
-                
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-300 hover:text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
+    <nav class="navbar fixed w-full z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="hkaifm-logo">
+                <div class="logo-font">HKAIIFF</div>
+                <div class="logo-sub">AI國際電影節</div>
+            </a>
+            <div class="hidden md:flex space-x-8 desktop-nav">
+                <a href="#about" class="hover:text-blue-400 transition">關於</a>
+                <a href="#ecosystem" class="hover:text-blue-400 transition">生態系統</a>
+                <a href="#pillars" class="hover:text-blue-400 transition">核心支柱</a>
+                <a href="#platforms" class="hover:text-blue-400 transition">平台</a>
+                <a href="#roadmap" class="hover:text-blue-400 transition">路線圖</a>
+                <a href="#contact" class="hover:text-blue-400 transition">聯繫</a>
             </div>
-            
-            <div id="mobile-menu" class="md:hidden hidden mt-3 pb-2">
-                <a href="#about" class="block py-2 text-gray-300 hover:text-white">關於</a>
-                <a href="#ecosystem" class="block py-2 text-gray-300 hover:text-white">生態系統</a>
-                <a href="#pillars" class="block py-2 text-gray-300 hover:text-white">核心支柱</a>
-                <a href="#platforms" class="block py-2 text-gray-300 hover:text-white">平台</a>
-                <a href="#roadmap" class="block py-2 text-gray-300 hover:text-white">路線圖</a>
-                <a href="#contact" class="block py-2 text-gray-300 hover:text-white">聯繫</a>
-                <a href="#participate" class="block py-2 mt-2 text-center rounded-full text-sm font-medium bg-pink-500 text-white">
-                    立即加入
-                </a>
+            <div class="flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <div class="language-indicator">
+                        <img src="https://flagcdn.com/w40/hk.png" alt="繁體中文(香港)">
+                        <span>繁中</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </div>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="zh-hk">
+                            <img src="https://flagcdn.com/w40/hk.png" alt="繁體中文(香港)">
+                            繁體中文(香港)
+                        </a>
+                        <a href="#" data-lang="zh-cn">
+                            <img src="https://flagcdn.com/w40/cn.png" alt="简体中文">
+                            简体中文
+                        </a>
+                        <a href="#" data-lang="en">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="English">
+                            English
+                        </a>
+                        <a href="#" data-lang="ja">
+                            <img src="https://flagcdn.com/w40/jp.png" alt="日本語">
+                            日本語
+                        </a>
+                        <a href="#" data-lang="ko">
+                            <img src="https://flagcdn.com/w40/kr.png" alt="한국어">
+                            한국어
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- AI Translate Toggle -->
+                <div class="ai-translate-toggle hidden md:flex">
+                    <i class="fas fa-robot text-blue-400"></i>
+                    <span class="ml-2 text-sm">AI翻譯</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="aiTranslateToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                
+                <!-- Login Container -->
+                <div class="login-container relative">
+                    <a href="#login" class="btn-primary px-6 py-2 rounded-full text-sm">登入</a>
+                    <div class="login-dropdown">
+                        <h3 class="font-bold text-lg mb-4">登入 HKAIIFF</h3>
+                        
+                        <div class="login-option" data-login="google">
+                            <i class="fab fa-google text-red-500"></i>
+                            <span>使用 Google 登入</span>
+                        </div>
+                        
+                        <div class="login-option" data-login="facebook">
+                            <i class="fab fa-facebook text-blue-600"></i>
+                            <span>使用 Facebook 登入</span>
+                        </div>
+                        
+                        <div class="login-option wallet-option" data-login="metamask">
+                            <i class="fas fa-wallet text-yellow-400"></i>
+                            <span>連接 MetaMask</span>
+                        </div>
+                        
+                        <div class="login-divider"></div>
+                        
+                        <div class="login-option" data-login="email">
+                            <i class="fas fa-envelope text-orange-400"></i>
+                            <span>使用電子郵件登入</span>
+                        </div>
+                        
+                        <div class="mt-4 text-center text-sm text-gray-400">
+                            登入即表示您同意我們的<a href="#" class="text-blue-400">條款</a>和<a href="#" class="text-blue-400">隱私政策</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="md:hidden text-white mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center gradient-bg pt-20">
-        <div class="animated-bg">
-            <!-- Animated background elements -->
-            <span style="--i:11; left: 10%; animation-delay: 0s;"></span>
-            <span style="--i:17; left: 20%; animation-delay: 2s;"></span>
-            <span style="--i:15; left: 30%; animation-delay: 4s;"></span>
-            <span style="--i:9; left: 40%; animation-delay: 6s;"></span>
-            <span style="--i:13; left: 50%; animation-delay: 8s;"></span>
-            <span style="--i:20; left: 60%; animation-delay: 10s;"></span>
-            <span style="--i:12; left: 70%; animation-delay: 12s;"></span>
-            <span style="--i:18; left: 80%; animation-delay: 14s;"></span>
-            <span style="--i:14; left: 90%; animation-delay: 16s;"></span>
-            <span style="--i:16; left: 5%; animation-delay: 1s;"></span>
-            <span style="--i:10; left: 15%; animation-delay: 3s;"></span>
-            <span style="--i:19; left: 25%; animation-delay: 5s;"></span>
-            <span style="--i:11; left: 35%; animation-delay: 7s;"></span>
-            <span style="--i:21; left: 45%; animation-delay: 9s;"></span>
-            <span style="--i:15; left: 55%; animation-delay: 11s;"></span>
-            <span style="--i:12; left: 65%; animation-delay: 13s;"></span>
-            <span style="--i:17; left: 75%; animation-delay: 15s;"></span>
-            <span style="--i:14; left: 85%; animation-delay: 17s;"></span>
-            <span style="--i:19; left: 95%; animation-delay: 19s;"></span>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close">
+            <i class="fas fa-times"></i>
         </div>
         
-        <div class="container mx-auto px-6 z-10">
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="w-full md:w-1/2 mb-12 md:mb-0">
-                    <div class="md:pr-10">
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-                            香港AI<br>國際<br>電影節
-                        </h1>
-                        <p class="text-xl md:text-2xl text-gray-300 mb-6">
-                            全球首個AI原生電影與媒體生態系統
-                        </p>
-                        <p class="text-gray-400 mb-8 max-w-lg">
-                            通過創新的"4+1+1"生態系統模式，徹底改變電影產業的創作、融資、發行和觀眾體驗。
-                        </p>
-                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#ecosystem" class="py-3 px-8 accent-gradient rounded-full font-medium text-white shadow-lg transform transition hover:scale-105 text-center">
-                                探索生態系統
-                            </a>
-                            <a href="#participate" class="py-3 px-8 border border-pink-500 rounded-full font-medium text-white shadow-lg transform transition hover:scale-105 hover:bg-pink-500 hover:bg-opacity-20 text-center">
-                                加入革命
-                            </a>
-                        </div>
-                    </div>
+        <div class="mt-12 flex flex-col space-y-6">
+            <a href="#about" class="text-xl hover:text-blue-400 transition">關於</a>
+            <a href="#ecosystem" class="text-xl hover:text-blue-400 transition">生態系統</a>
+            <a href="#pillars" class="text-xl hover:text-blue-400 transition">核心支柱</a>
+            <a href="#platforms" class="text-xl hover:text-blue-400 transition">平台</a>
+            <a href="#roadmap" class="text-xl hover:text-blue-400 transition">路線圖</a>
+            <a href="#contact" class="text-xl hover:text-blue-400 transition">聯繫</a>
+            
+            <div class="pt-6 border-t border-gray-700">
+                <h3 class="text-lg font-bold mb-4">語言</h3>
+                <select class="w-full bg-gray-800 text-white p-3 rounded-lg">
+                    <option value="zh-hk" selected>繁體中文(香港)</option>
+                    <option value="zh-cn">简体中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                </select>
+                
+                <div class="flex items-center mt-4">
+                    <span class="mr-3">AI翻譯</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="mobileAiTranslate" checked>
+                        <span class="slider"></span>
+                    </label>
                 </div>
-                <div class="w-full md:w-1/2">
-                    <div class="relative hero-animation">
-                        <div class="ai-film-img w-full h-96">
-                            <div class="ai-film-img-content">
-                                <i class="fas fa-robot"></i>
-                                <h3>AI電影新時代</h3>
-                                <p>人工智能與電影藝術的完美融合</p>
-                            </div>
-                        </div>
-                        <div class="absolute -bottom-5 -right-5 bg-gray-800 bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-lg p-3 shadow-lg">
-                            <div class="flex items-center">
-                                <div class="h-3 w-3 rounded-full bg-pink-500 animate-pulse mr-2"></div>
-                                <p class="text-sm font-medium">2025年啟動</p>
-                            </div>
-                        </div>
+            </div>
+            
+            <div class="pt-6 border-t border-gray-700">
+                <button class="btn-primary w-full py-3 rounded-lg font-medium text-center mb-4">
+                    登入
+                </button>
+                <button class="btn-secondary w-full py-3 rounded-lg font-medium text-center">
+                    連接錢包
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-3xl animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">香港AI<br>國際<br>電影節</h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    全球首個AI原生電影與媒體生態系統
+                </p>
+                <p class="text-gray-400 mb-8 max-w-lg">
+                    通過創新的"4+1+1"生態系統模式，徹底改變電影產業的創作、融資、發行和觀眾體驗。
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#ecosystem" class="btn-primary px-8 py-3 rounded-full font-medium text-center">
+                        探索生態系統
+                    </a>
+                    <a href="#participate" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
+                        加入革命
+                    </a>
+                </div>
+                
+                <div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-card">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="number">83%</div>
+                        <div class="text-sm">年增長率</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-globe-asia"></i>
+                        <div class="number">35%</div>
+                        <div class="text-sm">亞太市場份額</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-users"></i>
+                        <div class="number">18萬+</div>
+                        <div class="text-sm">人才需求</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-city"></i>
+                        <div class="number">5</div>
+                        <div class="text-sm">香港優勢</div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="absolute bottom-0 left-0 right-0">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#0f172a" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,170.7C672,149,768,107,864,101.3C960,96,1056,128,1152,149.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
-        </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
+    <section class="py-20 relative" id="about">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    AI生成內容革命
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">AI生成內容革命</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     我們正處在電影與媒體創作的歷史性變革時刻
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <!-- Market Growth -->
-                <div class="bg-gray-800 rounded-xl p-6 stat-card">
-                    <div class="text-pink-500 text-4xl mb-4 flex justify-center">
+                <div class="card p-6 stat-card">
+                    <div class="text-blue-400 text-4xl mb-4 flex justify-center">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-center">市場增長</h3>
@@ -455,15 +1199,15 @@
                     </div>
                     <div class="mt-4">
                         <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                            <div class="h-full rounded-full accent-gradient" style="width: 83%"></div>
+                            <div class="h-full rounded-full gradient-bg" style="width: 83%"></div>
                         </div>
                         <p class="mt-2 text-xs text-center text-gray-400">年增長率83%</p>
                     </div>
                 </div>
                 
                 <!-- Asia-Pacific Leadership -->
-                <div class="bg-gray-800 rounded-xl p-6 stat-card">
-                    <div class="text-pink-500 text-4xl mb-4 flex justify-center">
+                <div class="card p-6 stat-card">
+                    <div class="text-blue-400 text-4xl mb-4 flex justify-center">
                         <i class="fas fa-globe-asia"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-center">亞太地區領導地位</h3>
@@ -477,7 +1221,7 @@
                                 <path d="M18 2.0845
                                     a 15.9155 15.9155 0 0 1 0 31.831
                                     a 15.9155 15.9155 0 0 1 0 -31.831"
-                                    fill="none" stroke="#e94560" stroke-width="2" stroke-dasharray="35, 100" />
+                                    fill="none" stroke="#3498db" stroke-width="2" stroke-dasharray="35, 100" />
                                 <text x="18" y="20" font-size="8" text-anchor="middle" fill="white">35%</text>
                             </svg>
                         </div>
@@ -488,13 +1232,13 @@
                 </div>
                 
                 <!-- Talent Gap -->
-                <div class="bg-gray-800 rounded-xl p-6 stat-card">
-                    <div class="text-pink-500 text-4xl mb-4 flex justify-center">
+                <div class="card p-6 stat-card">
+                    <div class="text-blue-400 text-4xl mb-4 flex justify-center">
                         <i class="fas fa-users"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-center">人才缺口</h3>
                     <div class="text-center mb-3">
-                        <p class="text-4xl font-bold text-pink-500">180,000+</p>
+                        <p class="text-4xl font-bold text-blue-400">180,000+</p>
                         <p class="text-sm text-gray-400 mt-2">全球需要的專業人才</p>
                     </div>
                     <div class="text-sm text-gray-400">
@@ -510,30 +1254,30 @@
                 </div>
                 
                 <!-- Hong Kong Advantage -->
-                <div class="bg-gray-800 rounded-xl p-6 stat-card">
-                    <div class="text-pink-500 text-4xl mb-4 flex justify-center">
+                <div class="card p-6 stat-card">
+                    <div class="text-blue-400 text-4xl mb-4 flex justify-center">
                         <i class="fas fa-city"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-center">香港優勢</h3>
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li class="flex items-center">
-                            <i class="fas fa-check text-pink-500 mr-2"></i>
-                            <span>東西方文化橋樑</span>
+                            <i class="fas fa-check text-blue-400 mr-2"></i>
+                            <span>東西文化橋樑</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check text-pink-500 mr-2"></i>
+                            <i class="fas fa-check text-blue-400 mr-2"></i>
                             <span>全球金融中心</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check text-pink-500 mr-2"></i>
+                            <i class="fas fa-check text-blue-400 mr-2"></i>
                             <span>通往內地市場門戶</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check text-pink-500 mr-2"></i>
+                            <i class="fas fa-check text-blue-400 mr-2"></i>
                             <span>創新與科技中心</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-check text-pink-500 mr-2"></i>
+                            <i class="fas fa-check text-blue-400 mr-2"></i>
                             <span>支持性政策環境</span>
                         </li>
                     </ul>
@@ -541,25 +1285,25 @@
             </div>
             
             <!-- Industry Pain Points -->
-            <div class="bg-gray-800 rounded-xl p-8 shadow-lg">
+            <div class="card p-8 shadow-lg">
                 <h3 class="text-2xl font-bold mb-8 text-center">當前行業痛點</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold mb-2">高投資，高風險</h4>
-                            <p class="text-sm text-gray-400">電影製作周期長，投資回報不確定性高</p>
+                            <p class="text-sm text-gray-400">電影製作週期長，投資回報不確定性高</p>
                         </div>
                     </div>
                     
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
@@ -570,8 +1314,8 @@
                     
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
@@ -582,8 +1326,8 @@
                     
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
@@ -594,8 +1338,8 @@
                     
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
@@ -606,13 +1350,13 @@
                     
                     <div class="flex">
                         <div class="flex-shrink-0 mr-4">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-pink-500 bg-opacity-20">
-                                <i class="fas fa-exclamation-circle text-pink-500"></i>
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center bg-blue-400 bg-opacity-20">
+                                <i class="fas fa-exclamation-circle text-blue-400"></i>
                             </div>
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold mb-2">人才短缺</h4>
-                            <p class="text-sm text-gray-400">缺乏同時具備AI技術能力和創意理解的專業人才</p>
+                            <p class="text-sm text-gray-400">缺乏同時具備AI技術能力和創意理解的人才</p>
                         </div>
                     </div>
                 </div>
@@ -621,36 +1365,22 @@
     </section>
 
     <!-- Ecosystem Section -->
-    <section id="ecosystem" class="py-20 gradient-bg relative">
-        <div class="animated-bg">
-            <!-- Animated background elements -->
-            <span style="--i:15; left: 10%; animation-delay: 1s;"></span>
-            <span style="--i:18; left: 35%; animation-delay: 5s;"></span>
-            <span style="--i:13; left: 70%; animation-delay: 7s;"></span>
-            <span style="--i:19; left: 20%; animation-delay: 10s;"></span>
-            <span style="--i:12; left: 55%; animation-delay: 13s;"></span>
-            <span style="--i:16; left: 85%; animation-delay: 16s;"></span>
-            <span style="--i:14; left: 25%; animation-delay: 19s;"></span>
-            <span style="--i:17; left: 60%; animation-delay: 22s;"></span>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10">
+    <section class="py-20 relative" id="ecosystem">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    "4+1+1"生態系統
-                </h2>
-                <p class="text-gray-300 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">"4+1+1"生態系統</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     全球首個完整的AI原生電影與媒體生態系統，創建無縫整合的價值鏈
                 </p>
             </div>
             
             <div class="max-w-4xl mx-auto mb-16">
-                <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-2xl p-8 border border-gray-700 shadow-xl">
+                <div class="card p-8 border border-gray-700 shadow-xl">
                     <div class="flex flex-col md:flex-row items-center mb-8">
                         <div class="w-full md:w-1/3 mb-6 md:mb-0 md:pr-6">
                             <div class="text-center">
                                 <div class="w-20 h-20 rounded-full bg-blue-900 flex items-center justify-center mx-auto">
-                                    <i class="fas fa-bullseye text-3xl text-pink-500"></i>
+                                    <i class="fas fa-bullseye text-3xl text-blue-400"></i>
                                 </div>
                                 <h3 class="text-xl font-bold mt-4">使命與願景</h3>
                             </div>
@@ -667,15 +1397,15 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
                         <div class="p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                            <div class="w-3 h-3 bg-pink-500 rounded-full mx-auto mb-2"></div>
+                            <div class="w-3 h-3 bg-blue-400 rounded-full mx-auto mb-2"></div>
                             <p class="text-sm font-medium">技術創新</p>
                         </div>
                         <div class="p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                            <div class="w-3 h-3 bg-pink-500 rounded-full mx-auto mb-2"></div>
+                            <div class="w-3 h-3 bg-blue-400 rounded-full mx-auto mb-2"></div>
                             <p class="text-sm font-medium">價值包容</p>
                         </div>
                         <div class="p-4 bg-gray-900 bg-opacity-50 rounded-lg">
-                            <div class="w-3 h-3 bg-pink-500 rounded-full mx-auto mb-2"></div>
+                            <div class="w-3 h-3 bg-blue-400 rounded-full mx-auto mb-2"></div>
                             <p class="text-sm font-medium">生態整合</p>
                         </div>
                     </div>
@@ -689,13 +1419,13 @@
                     
                     <!-- Four Core Pillars -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">1</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">1</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-film text-2xl text-pink-500"></i>
+                                    <i class="fas fa-film text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">展映與競賽</h4>
                             </div>
@@ -703,19 +1433,19 @@
                                 發掘和獎勵優秀AI原生電影作品的國際平台
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#pillars" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#pillars" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">2</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">2</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-graduation-cap text-2xl text-pink-500"></i>
+                                    <i class="fas fa-graduation-cap text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">AI電影學院</h4>
                             </div>
@@ -723,19 +1453,19 @@
                                 培養AI+電影複合型人才的專業教育機構
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#pillars" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#pillars" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">3</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">3</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-chart-line text-2xl text-pink-500"></i>
+                                    <i class="fas fa-chart-line text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">AI電影市場</h4>
                             </div>
@@ -743,19 +1473,19 @@
                                 整合Web3和AI技術的電影項目融資與交易平台
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#pillars" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#pillars" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">4</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">4</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-globe text-2xl text-pink-500"></i>
+                                    <i class="fas fa-globe text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">提交中心</h4>
                             </div>
@@ -763,7 +1493,7 @@
                                 為AI原生電影內容提供全鏈服務的國際樞紐
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#pillars" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#pillars" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
@@ -772,13 +1502,13 @@
                     
                     <!-- Two Expansion Platforms -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">+1</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">+1</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-play-circle text-2xl text-pink-500"></i>
+                                    <i class="fas fa-play-circle text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">404.world平台</h4>
                             </div>
@@ -786,19 +1516,19 @@
                                 基於用戶數據提供個性化體驗的互動流媒體服務
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#platforms" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#platforms" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
                         </div>
                         
-                        <div class="bg-gray-800 bg-opacity-80 rounded-xl p-6 ecosystem-card relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-pink-500 bg-opacity-10 flex items-center justify-center">
-                                <span class="text-sm font-bold text-pink-500">+1</span>
+                        <div class="card p-6 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-16 h-16 rounded-bl-3xl bg-blue-400 bg-opacity-10 flex items-center justify-center">
+                                <span class="text-sm font-bold text-blue-400">+1</span>
                             </div>
                             <div class="text-center mb-4">
                                 <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                                    <i class="fas fa-exchange-alt text-2xl text-pink-500"></i>
+                                    <i class="fas fa-exchange-alt text-2xl text-blue-400"></i>
                                 </div>
                                 <h4 class="text-xl font-bold">AIF交易所</h4>
                             </div>
@@ -806,7 +1536,7 @@
                                 支持整個生態系統的代幣流通和價值交換平台
                             </p>
                             <div class="mt-4 text-center">
-                                <a href="#platforms" class="inline-flex items-center text-pink-500 text-sm hover:underline">
+                                <a href="#platforms" class="inline-flex items-center text-blue-400 text-sm hover:underline">
                                     了解更多 <i class="fas fa-chevron-right ml-1 text-xs"></i>
                                 </a>
                             </div>
@@ -817,34 +1547,34 @@
                 <!-- Ecosystem Value Flow -->
                 <div class="mt-16">
                     <h3 class="text-2xl font-bold text-center mb-10">生態系統價值流動</h3>
-                    <div class="bg-gray-800 bg-opacity-80 rounded-xl p-8 border border-gray-700">
+                    <div class="card p-8 border border-gray-700">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div>
                                 <h4 class="text-xl font-bold mb-4 flex items-center">
-                                    <i class="fas fa-sync-alt text-pink-500 mr-3"></i> 內容循環
+                                    <i class="fas fa-sync-alt text-blue-400 mr-3"></i> 內容循環
                                 </h4>
                                 <ul class="space-y-3 text-sm">
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">1</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">1</div>
                                         </div>
                                         <p class="text-gray-300">競賽發掘優質AI原生作品</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">2</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">2</div>
                                         </div>
                                         <p class="text-gray-300">提交中心處理全球發行</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">3</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">3</div>
                                         </div>
                                         <p class="text-gray-300">404.world提供互動體驗</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">4</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">4</div>
                                         </div>
                                         <p class="text-gray-300">用戶生成內容創造新靈感</p>
                                     </li>
@@ -853,30 +1583,30 @@
                             
                             <div>
                                 <h4 class="text-xl font-bold mb-4 flex items-center">
-                                    <i class="fas fa-user-graduate text-pink-500 mr-3"></i> 人才循環
+                                    <i class="fas fa-user-graduate text-blue-400 mr-3"></i> 人才循環
                                 </h4>
                                 <ul class="space-y-3 text-sm">
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">1</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">1</div>
                                         </div>
                                         <p class="text-gray-300">學院培養AI+電影複合人才</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">2</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">2</div>
                                         </div>
                                         <p class="text-gray-300">畢業生參與生態系統活動</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">3</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">3</div>
                                         </div>
                                         <p class="text-gray-300">實踐經驗反饋到課程體系</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">4</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">4</div>
                                         </div>
                                         <p class="text-gray-300">行業需求驅動人才培養</p>
                                     </li>
@@ -885,30 +1615,30 @@
                             
                             <div>
                                 <h4 class="text-xl font-bold mb-4 flex items-center">
-                                    <i class="fas fa-dollar-sign text-pink-500 mr-3"></i> 金融循環
+                                    <i class="fas fa-dollar-sign text-blue-400 mr-3"></i> 金融循環
                                 </h4>
                                 <ul class="space-y-3 text-sm">
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">1</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">1</div>
                                         </div>
                                         <p class="text-gray-300">電影市場提供融資機制</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">2</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">2</div>
                                         </div>
                                         <p class="text-gray-300">AIF交易所支持代幣流通</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">3</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">3</div>
                                         </div>
                                         <p class="text-gray-300">智能合約處理收益分配</p>
                                     </li>
                                     <li class="flex">
                                         <div class="flex-shrink-0 mr-2 mt-1">
-                                            <div class="w-5 h-5 rounded-full bg-pink-500 flex items-center justify-center text-xs font-bold">4</div>
+                                            <div class="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center text-xs font-bold">4</div>
                                         </div>
                                         <p class="text-gray-300">回報吸引更多資本投入</p>
                                     </li>
@@ -922,30 +1652,28 @@
     </section>
 
     <!-- Core Pillars Section -->
-    <section id="pillars" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
+    <section class="py-20 relative" id="pillars">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    四大核心支柱
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">四大核心支柱</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     我們革命性生態系統的基礎
                 </p>
             </div>
             
             <!-- Exhibition & Competition -->
-            <div class="bg-gray-800 rounded-xl p-6 md:p-8 mb-16 pillar-card">
+            <div class="card p-6 md:p-8 mb-16">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-film"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-film text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">展映與競賽</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 全球最具權威性的AI原生電影與媒體作品競賽平台
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 全球平台
                             </div>
                         </div>
@@ -956,19 +1684,19 @@
                                 <h4 class="text-lg font-semibold mb-3">獎項類別</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-trophy text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-trophy text-blue-400 mt-1 mr-2"></i>
                                         <span>獨角獸金獎（100萬美元獎金）</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-trophy text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-trophy text-blue-400 mt-1 mr-2"></i>
                                         <span>最佳AI導演、編劇、視覺設計</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-trophy text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-trophy text-blue-400 mt-1 mr-2"></i>
                                         <span>技術創新獎</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-trophy text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-trophy text-blue-400 mt-1 mr-2"></i>
                                         <span>特別獎和觀眾選擇獎</span>
                                     </li>
                                 </ul>
@@ -979,37 +1707,37 @@
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm">技術創新</span>
-                                            <span class="text-sm text-pink-500">30%</span>
+                                            <span class="text-sm text-blue-400">30%</span>
                                         </div>
                                         <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                                            <div class="h-full rounded-full accent-gradient" style="width: 30%"></div>
+                                            <div class="h-full rounded-full gradient-bg" style="width: 30%"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm">藝術價值</span>
-                                            <span class="text-sm text-pink-500">30%</span>
+                                            <span class="text-sm text-blue-400">30%</span>
                                         </div>
                                         <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                                            <div class="h-full rounded-full accent-gradient" style="width: 30%"></div>
+                                            <div class="h-full rounded-full gradient-bg" style="width: 30%"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm">商業潛力</span>
-                                            <span class="text-sm text-pink-500">20%</span>
+                                            <span class="text-sm text-blue-400">20%</span>
                                         </div>
                                         <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                                            <div class="h-full rounded-full accent-gradient" style="width: 20%"></div>
+                                            <div class="h-full rounded-full gradient-bg" style="width: 20%"></div>
                                         </div>
                                     </div>
                                     <div>
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm">文化影響</span>
-                                            <span class="text-sm text-pink-500">20%</span>
+                                            <span class="text-sm text-blue-400">20%</span>
                                         </div>
                                         <div class="h-2 w-full bg-gray-700 rounded-full overflow-hidden">
-                                            <div class="h-full rounded-full accent-gradient" style="width: 20%"></div>
+                                            <div class="h-full rounded-full gradient-bg" style="width: 20%"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1019,19 +1747,19 @@
                             <h4 class="text-lg font-semibold mb-3">全球影響力</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">300萬+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">300萬+</div>
                                     <p class="text-xs text-gray-400">總獎金池</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">100+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">100+</div>
                                     <p class="text-xs text-gray-400">參與國家</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">15+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">15+</div>
                                     <p class="text-xs text-gray-400">獎項類別</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">1000+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">1000+</div>
                                     <p class="text-xs text-gray-400">年度提交作品</p>
                                 </div>
                             </div>
@@ -1041,18 +1769,18 @@
             </div>
             
             <!-- AI Film Academy -->
-            <div class="bg-gray-800 rounded-xl p-6 md:p-8 mb-16 pillar-card">
+            <div class="card p-6 md:p-8 mb-16">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-graduation-cap"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-graduation-cap text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">AI電影學院</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 全球首個專注於AI電影與媒體的專業教育機構
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 人才培養
                             </div>
                         </div>
@@ -1063,19 +1791,19 @@
                                 <h4 class="text-lg font-semibold mb-3">教育體系</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                                         <span>自適應學習的數字教師系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                                         <span>動態更新的知識圖譜生態系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                                         <span>混合現實學習空間</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                                         <span>真實項目的行業連接平台</span>
                                     </li>
                                 </ul>
@@ -1102,19 +1830,19 @@
                             <h4 class="text-lg font-semibold mb-3">全球合作網絡</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">100</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">100</div>
                                     <p class="text-xs text-gray-400">2028年全球中心數量</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">50,000+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">50,000+</div>
                                     <p class="text-xs text-gray-400">培訓專業人才</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">144</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">144</div>
                                     <p class="text-xs text-gray-400">認證課程</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">71</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">71</div>
                                     <p class="text-xs text-gray-400">證書類型</p>
                                 </div>
                             </div>
@@ -1124,18 +1852,18 @@
             </div>
             
             <!-- AI Film Market -->
-            <div class="bg-gray-800 rounded-xl p-6 md:p-8 mb-16 pillar-card">
+            <div class="card p-6 md:p-8 mb-16">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-chart-line"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-chart-line text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">AI電影市場</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 革命性的區塊鏈平台，整合AI與電影融資和發行
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 融資平台
                             </div>
                         </div>
@@ -1146,19 +1874,19 @@
                                 <h4 class="text-lg font-semibold mb-3">技術創新</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-cube text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-cube text-blue-400 mt-1 mr-2"></i>
                                         <span>多層區塊鏈架構</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-file-contract text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-file-contract text-blue-400 mt-1 mr-2"></i>
                                         <span>透明融資的智能合約系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-robot text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-robot text-blue-400 mt-1 mr-2"></i>
                                         <span>AI模型整合用於內容評估</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-link text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-link text-blue-400 mt-1 mr-2"></i>
                                         <span>生產流程鏈上跟踪</span>
                                     </li>
                                 </ul>
@@ -1167,19 +1895,19 @@
                                 <h4 class="text-lg font-semibold mb-3">金融創新</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-coins text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-coins text-blue-400 mt-1 mr-2"></i>
                                         <span>雙層代幣經濟（AIF & 電影代幣）</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-tasks text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-tasks text-blue-400 mt-1 mr-2"></i>
                                         <span>多輪里程碑融資</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-certificate text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-certificate text-blue-400 mt-1 mr-2"></i>
                                         <span>基於NFT的版權交易系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-chart-pie text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-chart-pie text-blue-400 mt-1 mr-2"></i>
                                         <span>自動收益分配</span>
                                     </li>
                                 </ul>
@@ -1189,19 +1917,19 @@
                             <h4 class="text-lg font-semibold mb-3">市場轉型</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">40%</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">40%</div>
                                     <p class="text-xs text-gray-400">降低進入門檻</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">100%</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">100%</div>
                                     <p class="text-xs text-gray-400">透明追踪</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">24/7</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">24/7</div>
                                     <p class="text-xs text-gray-400">全球交易</p>
                                 </div>
                                 <div class="text-center">
-                                    <div class="text-3xl font-bold text-pink-500 mb-1">100億+</div>
+                                    <div class="text-3xl font-bold text-blue-400 mb-1">100億+</div>
                                     <p class="text-xs text-gray-400">市場潛力</p>
                                 </div>
                             </div>
@@ -1211,18 +1939,18 @@
             </div>
             
             <!-- Submission Center -->
-            <div class="bg-gray-800 rounded-xl p-6 md:p-8 pillar-card">
+            <div class="card p-6 md:p-8">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-globe"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-globe text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">提交中心</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 為AI原生電影與媒體內容提供全鏈服務的全球樞紐
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 全球發行
                             </div>
                         </div>
@@ -1233,19 +1961,19 @@
                                 <h4 class="text-lg font-semibold mb-3">全球網絡</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-building text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-building text-blue-400 mt-1 mr-2"></i>
                                         <span>香港總部為核心樞紐</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-map-marker-alt text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-2"></i>
                                         <span>全球6個區域中心</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-network-wired text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-network-wired text-blue-400 mt-1 mr-2"></i>
                                         <span>20+本地提交節點</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-handshake text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-handshake text-blue-400 mt-1 mr-2"></i>
                                         <span>與電影節和發行商的全球合作夥伴網絡</span>
                                     </li>
                                 </ul>
@@ -1254,35 +1982,35 @@
                                 <h4 class="text-lg font-semibold mb-3">服務組合</h4>
                                 <div class="grid grid-cols-2 gap-2 text-xs text-gray-400">
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-lightbulb text-pink-500 mr-1"></i>
+                                        <i class="fas fa-lightbulb text-blue-400 mr-1"></i>
                                         <span>創作諮詢</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-money-bill-wave text-pink-500 mr-1"></i>
+                                        <i class="fas fa-money-bill-wave text-blue-400 mr-1"></i>
                                         <span>代幣發行</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-copyright text-pink-500 mr-1"></i>
+                                        <i class="fas fa-copyright text-blue-400 mr-1"></i>
                                         <span>知識產權保護</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-language text-pink-500 mr-1"></i>
+                                        <i class="fas fa-language text-blue-400 mr-1"></i>
                                         <span>文化適應</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-film text-pink-500 mr-1"></i>
+                                        <i class="fas fa-film text-blue-400 mr-1"></i>
                                         <span>電影節申請</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-route text-pink-500 mr-1"></i>
+                                        <i class="fas fa-route text-blue-400 mr-1"></i>
                                         <span>展覽巡演</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-share-alt text-pink-500 mr-1"></i>
+                                        <i class="fas fa-share-alt text-blue-400 mr-1"></i>
                                         <span>全球發行</span>
                                     </div>
                                     <div class="p-2 bg-gray-700 bg-opacity-40 rounded">
-                                        <i class="fas fa-bullhorn text-pink-500 mr-1"></i>
+                                        <i class="fas fa-bullhorn text-blue-400 mr-1"></i>
                                         <span>營銷推廣</span>
                                     </div>
                                 </div>
@@ -1292,27 +2020,27 @@
                             <h4 class="text-lg font-semibold mb-3">發行渠道</h4>
                             <div class="flex flex-wrap gap-3">
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-desktop text-pink-500 mr-2"></i>
+                                    <i class="fas fa-desktop text-blue-400 mr-2"></i>
                                     <span>AIF在線影院</span>
                                 </div>
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-mobile-alt text-pink-500 mr-2"></i>
+                                    <i class="fas fa-mobile-alt text-blue-400 mr-2"></i>
                                     <span>移動應用</span>
                                 </div>
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-vr-cardboard text-pink-500 mr-2"></i>
+                                    <i class="fas fa-vr-cardboard text-blue-400 mr-2"></i>
                                     <span>元宇宙空間</span>
                                 </div>
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-film text-pink-500 mr-2"></i>
+                                    <i class="fas fa-film text-blue-400 mr-2"></i>
                                     <span>全球影院網絡</span>
                                 </div>
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-tv text-pink-500 mr-2"></i>
+                                    <i class="fas fa-tv text-blue-400 mr-2"></i>
                                     <span>傳統媒體</span>
                                 </div>
                                 <div class="px-3 py-1 bg-gray-700 bg-opacity-40 rounded-full text-sm flex items-center">
-                                    <i class="fas fa-plane text-pink-500 mr-2"></i>
+                                    <i class="fas fa-plane text-blue-400 mr-2"></i>
                                     <span>機上娛樂</span>
                                 </div>
                             </div>
@@ -1324,40 +2052,28 @@
     </section>
 
     <!-- Expansion Platforms Section -->
-    <section id="platforms" class="py-20 gradient-bg relative">
-        <div class="animated-bg">
-            <!-- Animated background elements -->
-            <span style="--i:13; left: 15%; animation-delay: 2s;"></span>
-            <span style="--i:16; left: 40%; animation-delay: 6s;"></span>
-            <span style="--i:19; left: 65%; animation-delay: 8s;"></span>
-            <span style="--i:11; left: 25%; animation-delay: 11s;"></span>
-            <span style="--i:14; left: 50%; animation-delay: 14s;"></span>
-            <span style="--i:17; left: 75%; animation-delay: 17s;"></span>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10">
+    <section class="py-20 relative" id="platforms">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    擴展平台
-                </h2>
-                <p class="text-gray-300 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">擴展平台</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     革命性平台，擴展生態系統的影響力和範圍
                 </p>
             </div>
             
             <!-- 404.world Platform -->
-            <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 mb-16 pillar-card">
+            <div class="card p-6 md:p-8 mb-16">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-play-circle"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-play-circle text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">404.world平台</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 全球首個專注於AI原生電影與媒體內容的互動流媒體平台
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 互動體驗
                             </div>
                         </div>
@@ -1378,19 +2094,19 @@
                                 <h4 class="text-lg font-semibold mb-3">實時互動引擎</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-database text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-database text-blue-400 mt-1 mr-2"></i>
                                         <span>具有隱私計算的數據融合層</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-brain text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-brain text-blue-400 mt-1 mr-2"></i>
                                         <span>用於上下文理解的語義分析引擎</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-puzzle-piece text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-puzzle-piece text-blue-400 mt-1 mr-2"></i>
                                         <span>用於敘事整合的上下文匹配系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-microchip text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-microchip text-blue-400 mt-1 mr-2"></i>
                                         <span>邊緣雲混合AI內容生成</span>
                                     </li>
                                 </ul>
@@ -1399,19 +2115,19 @@
                                 <h4 class="text-lg font-semibold mb-3">多維度平行世界</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-user text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-user text-blue-400 mt-1 mr-2"></i>
                                         <span>個人互動故事體驗</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-users text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-users text-blue-400 mt-1 mr-2"></i>
                                         <span>觀眾之間的共享宇宙探索</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-lightbulb text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-lightbulb text-blue-400 mt-1 mr-2"></i>
                                         <span>AI輔助的用戶生成內容生態系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-infinity text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-infinity text-blue-400 mt-1 mr-2"></i>
                                         <span>核心故事衍生的無限敘事可能</span>
                                     </li>
                                 </ul>
@@ -1422,22 +2138,22 @@
                             <h4 class="text-lg font-semibold mb-3">商業模式</h4>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
                                 <div class="p-4 bg-gray-700 bg-opacity-40 rounded-lg">
-                                    <i class="fas fa-star text-pink-500 text-2xl mb-2"></i>
+                                    <i class="fas fa-star text-blue-400 text-2xl mb-2"></i>
                                     <p class="font-medium">基礎會員</p>
                                     <p class="text-xs text-gray-400 mt-1">有限互動的標準觀看</p>
                                 </div>
                                 <div class="p-4 bg-gray-700 bg-opacity-40 rounded-lg">
-                                    <i class="fas fa-crown text-pink-500 text-2xl mb-2"></i>
+                                    <i class="fas fa-crown text-blue-400 text-2xl mb-2"></i>
                                     <p class="font-medium">404.world+</p>
                                     <p class="text-xs text-gray-400 mt-1">完整互動功能與無限世界</p>
                                 </div>
                                 <div class="p-4 bg-gray-700 bg-opacity-40 rounded-lg">
-                                    <i class="fas fa-paint-brush text-pink-500 text-2xl mb-2"></i>
+                                    <i class="fas fa-paint-brush text-blue-400 text-2xl mb-2"></i>
                                     <p class="font-medium">創作者計劃</p>
                                     <p class="text-xs text-gray-400 mt-1">高級創作工具與優質收益</p>
                                 </div>
                                 <div class="p-4 bg-gray-700 bg-opacity-40 rounded-lg">
-                                    <i class="fas fa-coins text-pink-500 text-2xl mb-2"></i>
+                                    <i class="fas fa-coins text-blue-400 text-2xl mb-2"></i>
                                     <p class="font-medium">代幣經濟</p>
                                     <p class="text-xs text-gray-400 mt-1">觀看與創作挖礦獎勵</p>
                                 </div>
@@ -1448,18 +2164,18 @@
             </div>
             
             <!-- AIF Exchange -->
-            <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-6 md:p-8 pillar-card">
+            <div class="card p-6 md:p-8">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
-                            <div class="platform-icon mb-4 md:mx-0">
-                                <i class="fas fa-exchange-alt"></i>
+                            <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto md:mx-0 mb-4">
+                                <i class="fas fa-exchange-alt text-2xl text-blue-400"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4">AIF交易所</h3>
                             <p class="text-sm text-gray-400 mb-4">
                                 生態系統的金融基礎設施 - 專業的數字資產交易平台
                             </p>
-                            <div class="inline-block bg-pink-500 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-pink-500">
+                            <div class="inline-block bg-blue-400 bg-opacity-20 rounded-full px-3 py-1 text-xs font-medium text-blue-400">
                                 金融引擎
                             </div>
                         </div>
@@ -1470,23 +2186,23 @@
                                 <h4 class="text-lg font-semibold mb-3">核心功能</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-sync text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-sync text-blue-400 mt-1 mr-2"></i>
                                         <span>平台與電影代幣的交易服務</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-tint text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-tint text-blue-400 mt-1 mr-2"></i>
                                         <span>為生態系統代幣提供流動性</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-rocket text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-rocket text-blue-400 mt-1 mr-2"></i>
                                         <span>首次代幣發行（ITO）基礎設施</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-lock text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-lock text-blue-400 mt-1 mr-2"></i>
                                         <span>代幣質押和收益生成</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-random text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-random text-blue-400 mt-1 mr-2"></i>
                                         <span>跨鏈資產橋接</span>
                                     </li>
                                 </ul>
@@ -1495,23 +2211,23 @@
                                 <h4 class="text-lg font-semibold mb-3">安全與合規</h4>
                                 <ul class="space-y-2 text-sm text-gray-400">
                                     <li class="flex items-start">
-                                        <i class="fas fa-shield-alt text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-shield-alt text-blue-400 mt-1 mr-2"></i>
                                         <span>多層安全架構</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-balance-scale text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-balance-scale text-blue-400 mt-1 mr-2"></i>
                                         <span>全球監管合規策略</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-chart-line text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-chart-line text-blue-400 mt-1 mr-2"></i>
                                         <span>實時風險監控系統</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-search text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-search text-blue-400 mt-1 mr-2"></i>
                                         <span>定期第三方安全審計</span>
                                     </li>
                                     <li class="flex items-start">
-                                        <i class="fas fa-umbrella text-pink-500 mt-1 mr-2"></i>
+                                        <i class="fas fa-umbrella text-blue-400 mt-1 mr-2"></i>
                                         <span>資產保險保護</span>
                                     </li>
                                 </ul>
@@ -1522,20 +2238,20 @@
                             <h4 class="text-lg font-semibold mb-3">生態系統集成</h4>
                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <div class="p-3 bg-gray-700 bg-opacity-40 rounded flex flex-col items-center">
-                                    <div class="w-10 h-10 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mb-2">
-                                        <i class="fas fa-arrows-alt text-pink-500"></i>
+                                    <div class="w-10 h-10 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mb-2">
+                                        <i class="fas fa-arrows-alt text-blue-400"></i>
                                     </div>
                                     <p class="text-sm font-medium">統一價值流通</p>
                                 </div>
                                 <div class="p-3 bg-gray-700 bg-opacity-40 rounded flex flex-col items-center">
-                                    <div class="w-10 h-10 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mb-2">
-                                        <i class="fas fa-search-dollar text-pink-500"></i>
+                                    <div class="w-10 h-10 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mb-2">
+                                        <i class="fas fa-search-dollar text-blue-400"></i>
                                     </div>
                                     <p class="text-sm font-medium">價值發現</p>
                                 </div>
                                 <div class="p-3 bg-gray-700 bg-opacity-40 rounded flex flex-col items-center">
-                                    <div class="w-10 h-10 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mb-2">
-                                        <i class="fas fa-gift text-pink-500"></i>
+                                    <div class="w-10 h-10 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mb-2">
+                                        <i class="fas fa-gift text-blue-400"></i>
                                     </div>
                                     <p class="text-sm font-medium">生態系統激勵</p>
                                 </div>
@@ -1548,187 +2264,60 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
+    <section class="py-20 relative" id="roadmap">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    發展路線圖
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">發展路線圖</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     我們構建AI電影與媒體未來的戰略計劃
                 </p>
             </div>
             
-            <div class="timeline-container py-10">
+            <div class="roadmap-container">
+                <div class="roadmap-line"></div>
+                
                 <!-- Phase 1 -->
-                <div class="timeline-item timeline-item-odd mb-16">
-                    <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center mb-4">
-                            <div class="text-3xl font-bold text-pink-500 mr-4">01</div>
-                            <div>
-                                <h3 class="text-xl font-bold">基礎期 (2025-2026)</h3>
-                                <p class="text-sm text-gray-400">建立核心基礎設施</p>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-film text-pink-500 mr-2"></i>
-                                    展映與競賽
-                                </div>
-                                <p class="text-gray-400 text-xs">成功舉辦首屆香港AI國際電影節</p>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-graduation-cap text-pink-500 mr-2"></i>
-                                    AI電影學院
-                                </div>
-                                <p class="text-gray-400 text-xs">完成核心課程體系並啟動初期項目</p>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-chart-line text-pink-500 mr-2"></i>
-                                    AI電影市場
-                                </div>
-                                <p class="text-gray-400 text-xs">啟動基本功能模塊和初始代幣發行</p>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-globe text-pink-500 mr-2"></i>
-                                    提交中心
-                                </div>
-                                <p class="text-gray-400 text-xs">在關鍵市場建立初步全球網絡</p>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-play-circle text-pink-500 mr-2"></i>
-                                    404.world平台
-                                </div>
-                                <p class="text-gray-400 text-xs">發布具有核心互動功能的基礎版本</p>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                <div class="font-medium mb-2 flex items-center">
-                                    <i class="fas fa-exchange-alt text-pink-500 mr-2"></i>
-                                    AIF交易所
-                                </div>
-                                <p class="text-gray-400 text-xs">完成合規布局並上線</p>
-                            </div>
-                        </div>
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">基礎期 (2025-2026)</div>
+                        <div class="roadmap-subtitle">建立核心基礎設施</div>
+                        <ul class="roadmap-list">
+                            <li>成功舉辦首屆香港AI國際電影節</li>
+                            <li>完成核心課程體系並啟動初期項目</li>
+                            <li>啟動基本功能模塊和初始代幣發行</li>
+                            <li>在關鍵市場建立初步全球網絡</li>
+                        </ul>
                     </div>
                 </div>
                 
                 <!-- Phase 2 -->
-                <div class="timeline-item timeline-item-even mb-16">
-                    <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center mb-4">
-                            <div class="text-3xl font-bold text-pink-500 mr-4">02</div>
-                            <div>
-                                <h3 class="text-xl font-bold">成長期 (2027-2028)</h3>
-                                <p class="text-sm text-gray-400">快速擴張和市場滲透</p>
-                            </div>
-                        </div>
-                        <div class="space-y-4 text-sm">
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">全球市場覆蓋</span>
-                                        <span class="text-pink-500">100+</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">電影節影響和參與的國家</p>
-                                </div>
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">學院中心</span>
-                                        <span class="text-pink-500">20+</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">全球建立的合作中心</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">市場交易量</span>
-                                        <span class="text-pink-500">100萬美元</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">AI電影市場的日交易量</p>
-                                </div>
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">提交節點</span>
-                                        <span class="text-pink-500">50+</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">全球提交中心網絡擴展</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">404.world用戶</span>
-                                        <span class="text-pink-500">1000萬</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">互動流媒體平台的活躍用戶</p>
-                                </div>
-                                <div class="bg-gray-700 bg-opacity-40 p-3 rounded">
-                                    <div class="flex justify-between items-center mb-1">
-                                        <span class="font-medium">代幣價值</span>
-                                        <span class="text-pink-500">50億美元</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">生態系統代幣總市值</p>
-                                </div>
-                            </div>
-                        </div>
+                <div class="roadmap-item right">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">成長期 (2027-2028)</div>
+                        <div class="roadmap-subtitle">快速擴張和市場滲透</div>
+                        <ul class="roadmap-list">
+                            <li>影響和參與的國家達到100+</li>
+                            <li>全球建立的合作中心達到20+</li>
+                            <li>AI電影市場的日交易量達到100萬美元</li>
+                            <li>全球提交中心網絡擴展至50+節點</li>
+                        </ul>
                     </div>
                 </div>
                 
                 <!-- Phase 3 -->
-                <div class="timeline-item timeline-item-odd">
-                    <div class="bg-gray-800 rounded-xl p-6 shadow-lg">
-                        <div class="flex items-center mb-4">
-                            <div class="text-3xl font-bold text-pink-500 mr-4">03</div>
-                            <div>
-                                <h3 class="text-xl font-bold">成熟期 (2029-2030)</h3>
-                                <p class="text-sm text-gray-400">行業領導地位和生態系統成熟</p>
-                            </div>
-                        </div>
-                        <div class="space-y-6 text-sm">
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div class="p-4 bg-gray-700 bg-opacity-40 rounded text-center">
-                                    <div class="text-2xl font-bold text-pink-500 mb-2">全球標杆</div>
-                                    <p class="text-gray-400 text-xs">成為AI原生電影製作和發行的行業標準</p>
-                                </div>
-                                <div class="p-4 bg-gray-700 bg-opacity-40 rounded text-center">
-                                    <div class="text-2xl font-bold text-pink-500 mb-2">10萬+人才</div>
-                                    <p class="text-gray-400 text-xs">通過學院網絡培訓的AI電影專家</p>
-                                </div>
-                                <div class="p-4 bg-gray-700 bg-opacity-40 rounded text-center">
-                                    <div class="text-2xl font-bold text-pink-500 mb-2">100億美元市場</div>
-                                    <p class="text-gray-400 text-xs">通過生態系統平台的內容交易規模</p>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="p-4 bg-gray-700 bg-opacity-40 rounded">
-                                    <div class="flex items-center mb-2">
-                                        <i class="fas fa-globe-asia text-pink-500 text-xl mr-3"></i>
-                                        <span class="font-medium">全球發行網絡</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">覆蓋全球所有主要市場的完整內容分發網絡，為區域觀眾提供專門的本地化服務</p>
-                                </div>
-                                <div class="p-4 bg-gray-700 bg-opacity-40 rounded">
-                                    <div class="flex items-center mb-2">
-                                        <i class="fas fa-users text-pink-500 text-xl mr-3"></i>
-                                        <span class="font-medium">5000萬+月活用戶</span>
-                                    </div>
-                                    <p class="text-gray-400 text-xs">所有平台產品的大規模參與用戶群，具有高保留率和參與率</p>
-                                </div>
-                            </div>
-                            <div class="bg-gray-700 bg-opacity-40 p-4 rounded">
-                                <div class="flex items-center mb-2">
-                                    <i class="fas fa-sync-alt text-pink-500 text-xl mr-3"></i>
-                                    <span class="font-medium">完整的自我強化循環</span>
-                                </div>
-                                <p class="text-gray-400 text-xs">生態系統實現完全成熟，所有組件之間無縫集成，創建可持續的創新引擎，持續發展AI電影產業</p>
-                            </div>
-                        </div>
+                <div class="roadmap-item left">
+                    <div class="roadmap-dot"></div>
+                    <div class="roadmap-content">
+                        <div class="roadmap-title">成熟期 (2029-2030)</div>
+                        <div class="roadmap-subtitle">行業領導地位和生態系統成熟</div>
+                        <ul class="roadmap-list">
+                            <li>成為AI原生電影製作和發行的行業標準</li>
+                            <li>通過學院網絡培訓10萬+AI電影專家</li>
+                            <li>通過生態系統平台實現100億美元內容交易規模</li>
+                            <li>實現完全成熟的自我強化循環生態系統</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1736,134 +2325,122 @@
     </section>
 
     <!-- Participation Section -->
-    <section id="participate" class="py-20 gradient-bg relative">
-        <div class="animated-bg">
-            <!-- Animated background elements -->
-            <span style="--i:12; left: 5%; animation-delay: 1s;"></span>
-            <span style="--i:15; left: 30%; animation-delay: 4s;"></span>
-            <span style="--i:18; left: 60%; animation-delay: 7s;"></span>
-            <span style="--i:13; left: 18%; animation-delay: 9s;"></span>
-            <span style="--i:16; left: 45%; animation-delay: 12s;"></span>
-            <span style="--i:19; left: 80%; animation-delay: 15s;"></span>
-        </div>
-        
-        <div class="container mx-auto px-6 relative z-10">
+    <section class="py-20 relative" id="participate">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    加入革命
-                </h2>
-                <p class="text-gray-300 max-w-2xl mx-auto mt-4">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">加入革命</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     發現您如何參與AI原生電影與媒體的未來
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <!-- Creators -->
-                <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-6 ecosystem-card">
+                <div class="card p-6">
                     <div class="text-center mb-6">
                         <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-lightbulb text-2xl text-pink-500"></i>
+                            <i class="fas fa-lightbulb text-2xl text-blue-400"></i>
                         </div>
                         <h3 class="text-xl font-bold">創作者</h3>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-400 mb-6">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>向展映與競賽提交作品</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>在AI電影學院提升技能</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>通過AI電影市場獲得融資</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>通過提交中心進行全球發行</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>在404.world上創建互動體驗</span>
                         </li>
                     </ul>
                     <div class="text-center">
-                        <a href="#" class="py-2 px-6 rounded-full text-sm font-medium border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition nav-btn">
+                        <a href="#" class="btn-secondary px-6 py-2 rounded-full text-sm font-medium">
                             創作者通道
                         </a>
                     </div>
                 </div>
                 
                 <!-- Investors -->
-                <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-6 ecosystem-card">
+                <div class="card p-6">
                     <div class="text-center mb-6">
                         <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-chart-pie text-2xl text-pink-500"></i>
+                            <i class="fas fa-chart-pie text-2xl text-blue-400"></i>
                         </div>
                         <h3 class="text-xl font-bold">投資者</h3>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-400 mb-6">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>低門檻投資AI電影項目</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>參與項目的代幣投資</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>支持基礎設施建設</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>資助區域學院合作中心</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>支持AI原生IP開發與創新</span>
                         </li>
                     </ul>
                     <div class="text-center">
-                        <a href="#" class="py-2 px-6 rounded-full text-sm font-medium border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition nav-btn">
+                        <a href="#" class="btn-secondary px-6 py-2 rounded-full text-sm font-medium">
                             投資機會
                         </a>
                     </div>
                 </div>
                 
                 <!-- Institutions -->
-                <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-6 ecosystem-card">
+                <div class="card p-6">
                     <div class="text-center mb-6">
                         <div class="w-16 h-16 rounded-full bg-gray-900 flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-building text-2xl text-pink-500"></i>
+                            <i class="fas fa-building text-2xl text-blue-400"></i>
                         </div>
                         <h3 class="text-xl font-bold">機構</h3>
                     </div>
                     <ul class="space-y-3 text-sm text-gray-400 mb-6">
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>提供AI、區塊鏈或其他技術支持</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>與展映與競賽合作</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>共建學院合作中心</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>建立發行渠道夥伴關係</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check-circle text-pink-500 mt-1 mr-2"></i>
+                            <i class="fas fa-check-circle text-blue-400 mt-1 mr-2"></i>
                             <span>開發互動內容合作</span>
                         </li>
                     </ul>
                     <div class="text-center">
-                        <a href="#" class="py-2 px-6 rounded-full text-sm font-medium border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition nav-btn">
+                        <a href="#" class="btn-secondary px-6 py-2 rounded-full text-sm font-medium">
                             合作夥伴框架
                         </a>
                     </div>
@@ -1871,42 +2448,42 @@
             </div>
             
             <!-- Engagement Process -->
-            <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-xl border border-gray-700 mb-16">
+            <div class="card p-8 shadow-xl border border-gray-700 mb-16">
                 <h3 class="text-2xl font-bold mb-8 text-center">參與流程</h3>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                     <div class="relative">
-                        <div class="w-16 h-16 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl font-bold text-pink-500">1</span>
+                        <div class="w-16 h-16 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-400">1</span>
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-center">初步接觸</h4>
                         <p class="text-sm text-gray-400 text-center">聯繫我們並確定最佳切入點</p>
                         <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-6 transform -translate-y-1/2">
-                            <i class="fas fa-chevron-right text-pink-500"></i>
+                            <i class="fas fa-chevron-right text-blue-400"></i>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="w-16 h-16 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl font-bold text-pink-500">2</span>
+                        <div class="w-16 h-16 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-400">2</span>
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-center">試點項目</h4>
                         <p class="text-sm text-gray-400 text-center">通過特定初始項目測試合作</p>
                         <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-6 transform -translate-y-1/2">
-                            <i class="fas fa-chevron-right text-pink-500"></i>
+                            <i class="fas fa-chevron-right text-blue-400"></i>
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="w-16 h-16 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl font-bold text-pink-500">3</span>
+                        <div class="w-16 h-16 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-400">3</span>
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-center">評估</h4>
                         <p class="text-sm text-gray-400 text-center">分析結果並完善合作框架</p>
                         <div class="hidden md:block absolute top-1/2 -right-3 w-6 h-6 transform -translate-y-1/2">
-                            <i class="fas fa-chevron-right text-pink-500"></i>
+                            <i class="fas fa-chevron-right text-blue-400"></i>
                         </div>
                     </div>
                     <div>
-                        <div class="w-16 h-16 rounded-full bg-pink-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
-                            <span class="text-2xl font-bold text-pink-500">4</span>
+                        <div class="w-16 h-16 rounded-full bg-blue-400 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold text-blue-400">4</span>
                         </div>
                         <h4 class="text-lg font-bold mb-2 text-center">全面整合</h4>
                         <p class="text-sm text-gray-400 text-center">制定長期生態系統參與策略</p>
@@ -1915,15 +2492,15 @@
             </div>
             
             <!-- Vision Statement -->
-            <div class="bg-gray-800 bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-xl border border-gray-700">
+            <div class="card p-8 shadow-xl border border-gray-700">
                 <div class="text-center mb-6">
-                    <i class="fas fa-quote-left text-4xl text-pink-500 opacity-50"></i>
+                    <i class="fas fa-quote-left text-4xl text-blue-400 opacity-50"></i>
                 </div>
                 <blockquote class="text-xl md:text-2xl text-center mb-6 italic text-gray-300">
                     我們邀請有遠見的組織和個人加入我們的變革之旅。共同在人工智能時代重新定義娛樂、講故事和創意表達的未來。
                 </blockquote>
                 <div class="text-center">
-                    <button class="py-3 px-10 accent-gradient rounded-full font-semibold text-white shadow-lg transform transition hover:scale-105">
+                    <button class="btn-primary px-10 py-3 rounded-full font-semibold">
                         立即開始
                     </button>
                 </div>
@@ -1932,75 +2509,80 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
+    <section class="py-20 relative" id="contact">
+        <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold section-title inline-block">
-                    聯繫我們
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto mt-4">
-                    聯繫我們的團隊，探索合作機會
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">聯繫我們</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    請填寫以下表格，我們將盡快回覆您的查詢
                 </p>
             </div>
             
-            <div class="bg-gray-800 rounded-xl p-8 mb-16">
-                <h3 class="text-2xl font-bold mb-6 text-center">取得聯繫</h3>
-                <form>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">姓名</label>
-                            <input type="text" id="name" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white">
+            <div class="contact-form-container">
+                <div class="card p-8 mb-16">
+                    <form class="contact-form">
+                        <div class="contact-form-grid">
+                            <div class="contact-form-row">
+                                <label for="name" class="contact-form-label">姓名</label>
+                                <input type="text" id="name" class="contact-form-input" required>
+                            </div>
+                            
+                            <div class="contact-form-row">
+                                <label for="email" class="contact-form-label">電子郵件</label>
+                                <input type="email" id="email" class="contact-form-input" required>
+                            </div>
+                            
+                            <div class="contact-form-row">
+                                <label for="company" class="contact-form-label">公司/機構</label>
+                                <input type="text" id="company" class="contact-form-input">
+                            </div>
+                            
+                            <div class="contact-form-row">
+                                <label for="position" class="contact-form-label">職位</label>
+                                <input type="text" id="position" class="contact-form-input">
+                            </div>
                         </div>
-                        <div>
-                            <label for="email" class="block text-sm font-medium mb-2">郵箱</label>
-                            <input type="email" id="email" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white">
+                        
+                        <div class="contact-form-row">
+                            <label for="interest" class="contact-form-label">感興趣的領域</label>
+                            <select id="interest" class="contact-form-input">
+                                <option value="">請選擇...</option>
+                                <option value="partnership">合作夥伴關係</option>
+                                <option value="sponsorship">贊助機會</option>
+                                <option value="submission">作品提交</option>
+                                <option value="investment">投資機會</option>
+                                <option value="media">媒體合作</option>
+                                <option value="other">其他</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="subject" class="block text-sm font-medium mb-2">主題</label>
-                        <input type="text" id="subject" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white">
-                    </div>
-                    <div class="mb-6">
-                        <label for="message" class="block text-sm font-medium mb-2">留言</label>
-                        <textarea id="message" rows="5" class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white"></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="py-3 px-8 accent-gradient rounded-full font-medium text-white shadow-lg">
-                            發送留言
-                        </button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-gray-800 rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4">關注我們</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500 transition">
-                            <i class="fab fa-twitter text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500 transition">
-                            <i class="fab fa-linkedin-in text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500 transition">
-                            <i class="fab fa-instagram text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500 transition">
-                            <i class="fab fa-youtube text-lg"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-pink-500 transition">
-                            <i class="fab fa-facebook-f text-lg"></i>
-                        </a>
-                    </div>
+                        
+                        <div class="contact-form-row">
+                            <label for="message" class="contact-form-label">您的留言</label>
+                            <textarea id="message" class="contact-form-input contact-form-textarea" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="contact-form-submit">發送留言</button>
+                    </form>
                 </div>
-                <div class="bg-gray-800 rounded-xl p-6">
-                    <h3 class="text-xl font-bold mb-4">通訊訂閱</h3>
-                    <p class="text-sm text-gray-400 mb-4">隨時了解最新新聞和公告</p>
-                    <div class="flex">
-                        <input type="email" placeholder="您的郵箱地址" class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent text-white">
-                        <button class="px-4 py-2 accent-gradient rounded-r-lg font-medium text-white">
-                            訂閱
-                        </button>
+                
+                <div class="contact-info-section text-center">
+                    <h3 class="text-2xl font-bold mb-6">關注我們獲取最新資訊</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon text-blue-400">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon text-blue-400">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon text-blue-400">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon text-blue-400">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-icon text-blue-400">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -2008,86 +2590,186 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 bg-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <a href="#" class="text-white font-bold text-xl">
-                        <span class="text-pink-500">HK</span>AIIFF
+    <footer class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <a href="index.html" class="hkaifm-logo mb-4">
+                        <div class="logo-font">HKAIIFF</div>
+                        <div class="logo-sub">AI國際電影節</div>
                     </a>
-                    <p class="text-sm text-gray-400 mt-2">
-                        全球首個AI原生電影與媒體生態系統
+                    <p class="text-gray-400 mb-4">
+                        通過AI和區塊鏈技術革新電影產業。
                     </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-medium"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition">隱私政策</a>
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition">服務條款</a>
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition">常見問題</a>
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition">新聞稿</a>
-                    <a href="#" class="text-sm text-gray-400 hover:text-white transition">合作夥伴</a>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">平台</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white">關於</a></li>
+                        <li><a href="#ecosystem" class="text-gray-400 hover:text-white">生態系統</a></li>
+                        <li><a href="#pillars" class="text-gray-400 hover:text-white">核心支柱</a></li>
+                        <li><a href="#platforms" class="text-gray-400 hover:text-white">平台</a></li>
+                        <li><a href="#roadmap" class="text-gray-400 hover:text-white">路線圖</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">資源</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#whitepaper" class="text-gray-400 hover:text-white">白皮書</a></li>
+                        <li><a href="#documentation" class="text-gray-400 hover:text-white">文檔</a></li>
+                        <li><a href="#tokenomics" class="text-gray-400 hover:text-white">代幣經濟學</a></li>
+                        <li><a href="#developers" class="text-gray-400 hover:text-white">開發者</a></li>
+                        <li><a href="#support" class="text-gray-400 hover:text-white">支持</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">法律</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#terms" class="text-gray-400 hover:text-white">服務條款</a></li>
+                        <li><a href="#privacy" class="text-gray-400 hover:text-white">隱私政策</a></li>
+                        <li><a href="#copyright" class="text-gray-400 hover:text-white">版權政策</a></li>
+                        <li><a href="#compliance" class="text-gray-400 hover:text-white">監管合規</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">聯繫我們</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
-                <p class="text-sm text-gray-500">
-                    &copy; 2025 香港AI國際電影節。保留所有權利。
-                </p>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2025 香港AI國際電影節。保留所有權利。</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Scroll to Top Button -->
-    <button id="scroll-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full accent-gradient flex items-center justify-center shadow-lg opacity-0 invisible transition-all">
-        <i class="fas fa-chevron-up text-white"></i>
-    </button>
 
-    <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Scroll to top button
-        const scrollTopButton = document.getElementById('scroll-top');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopButton.classList.remove('opacity-0', 'invisible');
-                scrollTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                scrollTopButton.classList.remove('opacity-100', 'visible');
-                scrollTopButton.classList.add('opacity-0', 'invisible');
-            }
-        });
-        
-        scrollTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    mobileMenu.classList.add('hidden'); // Close mobile menu if open
+        // Add random data streams
+        function createDataStreams() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const stream = document.createElement('div');
+                    stream.className = 'data-stream';
+                    stream.style.left = Math.random() * 100 + '%';
+                    stream.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(stream);
                     
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80, // Account for fixed header
-                        behavior: 'smooth'
-                    });
+                    // Remove after animation
+                    setTimeout(() => {
+                        stream.remove();
+                    }, 4000);
+                }, i * 3000);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start data streams
+            createDataStreams();
+            setInterval(createDataStreams, 15000);
+            
+            // Add scroll animations
+            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        if (entry.target.classList.contains('animate-slide-up')) {
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                        if (entry.target.classList.contains('animate-slide-right')) {
+                            entry.target.style.transform = 'translateX(0)';
+                        }
+                        if (entry.target.classList.contains('animate-fade-in')) {
+                            entry.target.style.transform = 'scale(1)';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                if (el.classList.contains('animate-slide-up')) {
+                    el.style.transform = 'translateY(50px)';
                 }
+                if (el.classList.contains('animate-slide-right')) {
+                    el.style.transform = 'translateX(-50px)';
+                }
+                if (el.classList.contains('animate-fade-in')) {
+                    el.style.transform = 'scale(0.95)';
+                }
+                observer.observe(el);
             });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Language selection
+            const languageLinks = document.querySelectorAll('.language-dropdown a');
+            const languageIndicator = document.querySelector('.language-indicator');
+            
+            languageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    const flag = link.querySelector('img').src;
+                    const text = link.textContent.trim();
+                    
+                    // Update language indicator
+                    languageIndicator.innerHTML = `
+                        <img src="${flag}" alt="${text}">
+                        <span>${lang === 'zh-hk' ? '繁中' : lang.toUpperCase()}</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    `;
+                    
+                    // Show translation message
+                    const translateToggle = document.getElementById('aiTranslateToggle');
+                    if (translateToggle.checked) {
+                        alert(`將內容翻譯為${text}...`);
+                    }
+                });
+            });
+            
+            // Login option handlers
+            const loginOptions = document.querySelectorAll('.login-option');
+            
+            loginOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const loginType = option.getAttribute('data-login');
+                    
+                    if (loginType === 'metamask' || loginType === 'walletconnect') {
+                        alert(`連接${loginType === 'metamask' ? 'MetaMask' : 'WalletConnect'}錢包...`);
+                    } else {
+                        alert(`使用${loginType.charAt(0).toUpperCase() + loginType.slice(1)}登入...`);
+                    }
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('感謝您的留言！我們將盡快回覆您。');
+                    contactForm.reset();
+                });
+            }
         });
     </script>
 </body>
