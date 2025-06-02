@@ -27,8 +27,8 @@
         .logo-font {
             font-family: 'Orbitron', sans-serif;
             font-weight: 800;
-            font-size: 2.5rem;
-            letter-spacing: 3px;
+            font-size: 2rem; /* 移动端减小字体大小 */
+            letter-spacing: 2px; /* 减小字间距 */
             background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
@@ -47,11 +47,11 @@
         .logo-sub {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.7rem;
-            letter-spacing: 4px;
+            font-size: 0.6rem; /* 减小字体大小 */
+            letter-spacing: 3px; /* 减小字间距 */
             text-transform: uppercase;
             color: var(--accent);
-            margin-top: -10px;
+            margin-top: -5px; /* 调整间距 */
             text-align: center;
             opacity: 0.8;
         }
@@ -91,6 +91,8 @@
             background-color: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+            padding: 12px 16px; /* 增加内边距 */
+            height: 70px; /* 固定高度 */
         }
         
         .btn-primary {
@@ -124,7 +126,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 80px;
+            padding-top: 100px; /* 增加顶部内边距 */
         }
         
         .hero:before {
@@ -809,60 +811,6 @@
             color: var(--accent);
         }
         
-        /* 调整移动端路线图样式 */
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .language-selector {
-                margin-right: 10px;
-            }
-            
-            .ai-tech-img {
-                height: 300px;
-            }
-            
-            .logo-font {
-                font-size: 1.8rem;
-            }
-            
-            .hero-bg {
-                animation: none;
-            }
-            
-            /* 移动端路线图样式 */
-            .roadmap-line {
-                left: 20px;
-            }
-            
-            .roadmap-item {
-                width: calc(100% - 40px);
-                margin-left: 40px;
-                text-align: left;
-                padding-left: 60px;
-            }
-            
-            .roadmap-item.left, 
-            .roadmap-item.right {
-                margin-right: 0;
-                margin-left: 40px;
-                text-align: left;
-                padding-right: 0;
-                padding-left: 60px;
-            }
-            
-            .roadmap-item.left .roadmap-dot, 
-            .roadmap-item.right .roadmap-dot {
-                left: -12px;
-                right: auto;
-            }
-        }
-        
         /* 新的联系我们样式 */
         .contact-form-container {
             max-width: 800px;
@@ -955,6 +903,99 @@
             color: #0a0a0a;
             transform: translateY(-5px);
         }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .desktop-nav-actions {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .language-selector {
+                margin-right: 10px;
+            }
+            
+            .ai-tech-img {
+                height: 300px;
+            }
+            
+            .logo-font {
+                font-size: 1.8rem;
+            }
+            
+            .hero-bg {
+                animation: none;
+            }
+            
+            /* 移动端路线图样式 */
+            .roadmap-line {
+                left: 20px;
+            }
+            
+            .roadmap-item {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+                text-align: left;
+                padding-left: 60px;
+            }
+            
+            .roadmap-item.left, 
+            .roadmap-item.right {
+                margin-right: 0;
+                margin-left: 40px;
+                text-align: left;
+                padding-right: 0;
+                padding-left: 60px;
+            }
+            
+            .roadmap-item.left .roadmap-dot, 
+            .roadmap-item.right .roadmap-dot {
+                left: -12px;
+                right: auto;
+            }
+            
+            /* 增加英雄区顶部内边距 */
+            .hero {
+                padding-top: 120px;
+            }
+            
+            /* 调整统计卡片布局 */
+            .hero .grid-cols-4 {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            /* 调整关于部分卡片布局 */
+            #about .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 调整生态系统卡片布局 */
+            #ecosystem .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 调整核心支柱卡片布局 */
+            .pillar-card {
+                margin-bottom: 20px;
+            }
+            
+            /* 调整参与卡片布局 */
+            #participate .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            /* 调整表单布局 */
+            .contact-form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -978,7 +1019,7 @@
     <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
 
     <!-- Navigation -->
-    <nav class="navbar fixed w-full z-50 px-4 py-3">
+    <nav class="navbar fixed w-full z-50">
         <div class="container mx-auto flex justify-between items-center">
             <a href="index.html" class="hkaifm-logo">
                 <div class="logo-font">HKAIIFF</div>
@@ -992,7 +1033,7 @@
                 <a href="#roadmap" class="hover:text-blue-400 transition">路線圖</a>
                 <a href="#contact" class="hover:text-blue-400 transition">聯繫</a>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4 desktop-nav-actions">
                 <!-- Language Selector -->
                 <div class="language-selector">
                     <div class="language-indicator">
@@ -1067,11 +1108,11 @@
                         </div>
                     </div>
                 </div>
-                
-                <button class="md:hidden text-white mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
             </div>
+            
+            <button class="md:hidden text-white mobile-menu-btn">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
         </div>
     </nav>
 
@@ -1662,7 +1703,7 @@
             </div>
             
             <!-- Exhibition & Competition -->
-            <div class="card p-6 md:p-8 mb-16">
+            <div class="card p-6 md:p-8 mb-16 pillar-card">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
@@ -1769,7 +1810,7 @@
             </div>
             
             <!-- AI Film Academy -->
-            <div class="card p-6 md:p-8 mb-16">
+            <div class="card p-6 md:p-8 mb-16 pillar-card">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
@@ -1852,7 +1893,7 @@
             </div>
             
             <!-- AI Film Market -->
-            <div class="card p-6 md:p-8 mb-16">
+            <div class="card p-6 md:p-8 mb-16 pillar-card">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
@@ -1939,7 +1980,7 @@
             </div>
             
             <!-- Submission Center -->
-            <div class="card p-6 md:p-8">
+            <div class="card p-6 md:p-8 pillar-card">
                 <div class="flex flex-col md:flex-row">
                     <div class="w-full md:w-1/3 mb-6 md:mb-0">
                         <div class="text-center md:text-left md:pr-8">
@@ -2641,7 +2682,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
-                <p>© 2025 香港AI國際電影節。保留所有權利。</p>
+                <p>2025 香港AI國際電影節协会有限公司。保留所有權利。</p>
             </div>
         </div>
     </footer>
