@@ -27,8 +27,8 @@
         .logo-font {
             font-family: 'Orbitron', sans-serif;
             font-weight: 800;
-            font-size: 2rem; /* 移动端减小字体大小 */
-            letter-spacing: 2px; /* 减小字间距 */
+            font-size: 1.8rem;
+            letter-spacing: 1px;
             background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
@@ -47,11 +47,11 @@
         .logo-sub {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
-            font-size: 0.6rem; /* 减小字体大小 */
-            letter-spacing: 3px; /* 减小字间距 */
+            font-size: 0.6rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--accent);
-            margin-top: -5px; /* 调整间距 */
+            margin-top: -5px;
             text-align: center;
             opacity: 0.8;
         }
@@ -91,8 +91,11 @@
             background-color: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(0, 255, 157, 0.1);
-            padding: 12px 16px; /* 增加内边距 */
-            height: 70px; /* 固定高度 */
+            padding: 12px 16px;
+            height: 70px;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
         }
         
         .btn-primary {
@@ -126,7 +129,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 100px; /* 增加顶部内边距 */
+            padding-top: 120px;
         }
         
         .hero:before {
@@ -446,14 +449,16 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 300px;
+            width: 100%;
+            max-width: 320px;
             height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
+            background: rgba(10, 10, 10, 0.98);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 20px;
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            overflow-y: auto;
         }
         
         .mobile-menu.open {
@@ -482,7 +487,7 @@
         
         .ai-tech-img {
             width: 100%;
-            height: 400px;
+            height: 300px;
             object-fit: cover;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -904,6 +909,54 @@
             transform: translateY(-5px);
         }
         
+        /* 合作伙伴样式 */
+        .partner-section {
+            padding: 60px 0;
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .partner-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--accent);
+        }
+        
+        .partner-category {
+            margin-bottom: 30px;
+        }
+        
+        .partner-category-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .partner-names {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .partner-name {
+            font-size: 0.9rem;
+            color: #ccc;
+            padding: 8px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-name:hover {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 255, 157, 0.3);
+        }
+        
         /* 移动端优化 */
         @media (max-width: 768px) {
             .desktop-nav {
@@ -923,11 +976,11 @@
             }
             
             .ai-tech-img {
-                height: 300px;
+                height: 250px;
             }
             
             .logo-font {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
             
             .hero-bg {
@@ -963,12 +1016,13 @@
             
             /* 增加英雄区顶部内边距 */
             .hero {
-                padding-top: 120px;
+                padding-top: 140px;
             }
             
             /* 调整统计卡片布局 */
             .hero .grid-cols-4 {
                 grid-template-columns: 1fr 1fr;
+                gap: 15px;
             }
             
             /* 调整关于部分卡片布局 */
@@ -995,13 +1049,51 @@
             .contact-form-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .partner-name {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .stats-card {
+                padding: 15px;
+            }
+            
+            .stats-card .number {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero .grid-cols-4 {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem !important;
+            }
+            
+            .partner-names {
+                gap: 8px;
+            }
+            
+            .partner-name {
+                font-size: 0.75rem;
+                padding: 5px 10px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- AI Elements -->
-    <!-- 已移除第一个绿色浮动框 -->
-    
     <div class="ai-element" style="bottom: 150px; right: 15%;">
         TOKEN_DIST: OPTIMAL <br>
         HASH: 0x71A9B3...F7E <br>
@@ -1015,7 +1107,7 @@
     <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
 
     <!-- Navigation -->
-    <nav class="navbar fixed w-full z-50">
+    <nav class="navbar">
         <div class="container mx-auto flex justify-between items-center">
             <a href="index.html" class="hkaifm-logo">
                 <div class="logo-font">HKAIIFF</div>
@@ -1059,16 +1151,6 @@
                             한국어
                         </a>
                     </div>
-                </div>
-                
-                <!-- AI Translate Toggle -->
-                <div class="ai-translate-toggle hidden md:flex">
-                    <i class="fas fa-robot text-blue-400"></i>
-                    <span class="ml-2 text-sm">AI翻譯</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="aiTranslateToggle" checked>
-                        <span class="slider"></span>
-                    </label>
                 </div>
                 
                 <!-- Login Container -->
@@ -1135,14 +1217,6 @@
                     <option value="ja">日本語</option>
                     <option value="ko">한국어</option>
                 </select>
-                
-                <div class="flex items-center mt-4">
-                    <span class="mr-3">AI翻譯</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="mobileAiTranslate" checked>
-                        <span class="slider"></span>
-                    </label>
-                </div>
             </div>
             
             <div class="pt-6 border-t border-gray-700">
@@ -2545,6 +2619,123 @@
         </div>
     </section>
 
+    <!-- Partners Section -->
+    <section class="partner-section" id="partners">
+        <div class="container mx-auto px-4">
+            <h2 class="partner-title">官方授權與合作伙伴</h2>
+            
+            <!-- Official Organizations -->
+            <div class="partner-category">
+                <h3 class="partner-category-title">香港AI國際電影節官方授權</h3>
+                <div class="partner-names">
+                    <span class="partner-name">香港AI國際電影節協會</span>
+                    <span class="partner-name">香港AI國際電影節頒獎禮</span>
+                    <span class="partner-name">香港AI電影市場</span>
+                    <span class="partner-name">香港AI電影學院</span>
+                    <span class="partner-name">香港AI國際電影節徵片中心</span>
+                    <span class="partner-name">香港AI電影標準委員會</span>
+                    <span class="partner-name">香港AI電影基金會</span>
+                </div>
+            </div>
+            
+            <!-- AI Technology Partners -->
+            <div class="partner-category">
+                <h3 class="partner-category-title">AI技術合作伙伴</h3>
+                <div class="partner-names">
+                    <span class="partner-name">OpenAI</span>
+                    <span class="partner-name">Anthropic</span>
+                    <span class="partner-name">Midjourney</span>
+                    <span class="partner-name">Stable Diffusion</span>
+                    <span class="partner-name">NVIDIA</span>
+                    <span class="partner-name">Google AI</span>
+                    <span class="partner-name">Microsoft AI</span>
+                    <span class="partner-name">DeepMind</span>
+                    <span class="partner-name">Runway ML</span>
+                    <span class="partner-name">Adobe Sensei</span>
+                    <span class="partner-name">Meta AI</span>
+                    <span class="partner-name">ElevenLabs</span>
+                    <span class="partner-name">Synthesia</span>
+                    <span class="partner-name">Replicate</span>
+                    <span class="partner-name">Hugging Face</span>
+                    <span class="partner-name">Cohere</span>
+                    <span class="partner-name">AI21 Labs</span>
+                    <span class="partner-name">Jasper AI</span>
+                </div>
+            </div>
+            
+            <!-- Blockchain Technology Partners -->
+            <div class="partner-category">
+                <h3 class="partner-category-title">區塊鏈技術伙伴</h3>
+                <div class="partner-names">
+                    <span class="partner-name">Ethereum</span>
+                    <span class="partner-name">Polygon</span>
+                    <span class="partner-name">Arbitrum</span>
+                    <span class="partner-name">Binance Smart Chain</span>
+                    <span class="partner-name">Avalanche</span>
+                    <span class="partner-name">Solana</span>
+                    <span class="partner-name">Optimism</span>
+                    <span class="partner-name">Chainlink</span>
+                    <span class="partner-name">IPFS</span>
+                    <span class="partner-name">Arweave</span>
+                    <span class="partner-name">MetaMask</span>
+                    <span class="partner-name">WalletConnect</span>
+                    <span class="partner-name">OpenSea</span>
+                    <span class="partner-name">Rarible</span>
+                    <span class="partner-name">Foundation</span>
+                    <span class="partner-name">Immutable X</span>
+                    <span class="partner-name">Flow Blockchain</span>
+                </div>
+            </div>
+            
+            <!-- Digital Currency Support -->
+            <div class="partner-category">
+                <h3 class="partner-category-title">支持的數字貨幣</h3>
+                <div class="partner-names">
+                    <span class="partner-name">Bitcoin (BTC)</span>
+                    <span class="partner-name">Ethereum (ETH)</span>
+                    <span class="partner-name">USDT</span>
+                    <span class="partner-name">USDC</span>
+                    <span class="partner-name">Binance Coin (BNB)</span>
+                    <span class="partner-name">Cardano (ADA)</span>
+                    <span class="partner-name">Polygon (MATIC)</span>
+                    <span class="partner-name">Chainlink (LINK)</span>
+                    <span class="partner-name">Avalanche (AVAX)</span>
+                    <span class="partner-name">Solana (SOL)</span>
+                    <span class="partner-name">Polkadot (DOT)</span>
+                    <span class="partner-name">AIF Token</span>
+                    <span class="partner-name">Film Token</span>
+                    <span class="partner-name">Litecoin (LTC)</span>
+                    <span class="partner-name">Dogecoin (DOGE)</span>
+                    <span class="partner-name">Shiba Inu (SHIB)</span>
+                </div>
+            </div>
+            
+            <!-- Media and Content Partners -->
+            <div class="partner-category">
+                <h3 class="partner-category-title">媒體與內容合作伙伴</h3>
+                <div class="partner-names">
+                    <span class="partner-name">BBC Studios</span>
+                    <span class="partner-name">Warner Bros</span>
+                    <span class="partner-name">Disney Studios</span>
+                    <span class="partner-name">Universal Pictures</span>
+                    <span class="partner-name">Paramount Pictures</span>
+                    <span class="partner-name">Netflix Studios</span>
+                    <span class="partner-name">Apple Studios</span>
+                    <span class="partner-name">Amazon Studios</span>
+                    <span class="partner-name">HBO Max</span>
+                    <span class="partner-name">A24 Films</span>
+                    <span class="partner-name">Focus Features</span>
+                    <span class="partner-name">Sony Pictures</span>
+                    <span class="partner-name">Lionsgate</span>
+                    <span class="partner-name">MGM Studios</span>
+                    <span class="partner-name">20th Century Studios</span>
+                    <span class="partner-name">Hulu Originals</span>
+                    <span class="partner-name">YouTube Studios</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="py-20 relative" id="contact">
         <div class="container mx-auto px-4">
@@ -2684,31 +2875,61 @@
     </footer>
 
     <script>
-        // Add random data streams
-        function createDataStreams() {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const stream = document.createElement('div');
-                    stream.className = 'data-stream';
-                    stream.style.left = Math.random() * 100 + '%';
-                    stream.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(stream);
-                    
-                    // Remove after animation
-                    setTimeout(() => {
-                        stream.remove();
-                    }, 4000);
-                }, i * 3000);
-            }
-        }
-        
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            // Start data streams
-            createDataStreams();
-            setInterval(createDataStreams, 15000);
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
             
-            // Add scroll animations
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuClose.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close mobile menu when clicking a link
+            const mobileLinks = document.querySelectorAll('.mobile-menu a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const offset = 80; // Account for fixed header height
+                        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Form submission
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('感謝您的留言！我們將盡快回覆您。');
+                    contactForm.reset();
+                });
+            }
+            
+            // Add animations to elements when they come into view
             const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right');
             
             const observer = new IntersectionObserver((entries) => {
@@ -2741,72 +2962,6 @@
                 }
                 observer.observe(el);
             });
-            
-            // Mobile menu functionality
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuClose = document.querySelector('.mobile-menu-close');
-            
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            mobileMenuClose.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Language selection
-            const languageLinks = document.querySelectorAll('.language-dropdown a');
-            const languageIndicator = document.querySelector('.language-indicator');
-            
-            languageLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const lang = link.getAttribute('data-lang');
-                    const flag = link.querySelector('img').src;
-                    const text = link.textContent.trim();
-                    
-                    // Update language indicator
-                    languageIndicator.innerHTML = `
-                        <img src="${flag}" alt="${text}">
-                        <span>${lang === 'zh-hk' ? '繁中' : lang.toUpperCase()}</span>
-                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
-                    `;
-                    
-                    // Show translation message
-                    const translateToggle = document.getElementById('aiTranslateToggle');
-                    if (translateToggle.checked) {
-                        alert(`將內容翻譯為${text}...`);
-                    }
-                });
-            });
-            
-            // Login option handlers
-            const loginOptions = document.querySelectorAll('.login-option');
-            
-            loginOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const loginType = option.getAttribute('data-login');
-                    
-                    if (loginType === 'metamask' || loginType === 'walletconnect') {
-                        alert(`連接${loginType === 'metamask' ? 'MetaMask' : 'WalletConnect'}錢包...`);
-                    } else {
-                        alert(`使用${loginType.charAt(0).toUpperCase() + loginType.slice(1)}登入...`);
-                    }
-                });
-            });
-            
-            // Contact form submission
-            const contactForm = document.querySelector('.contact-form');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('感謝您的留言！我們將盡快回覆您。');
-                    contactForm.reset();
-                });
-            }
         });
     </script>
 </body>
